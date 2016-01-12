@@ -1,0 +1,20 @@
+{
+  "name": "rutracker-api",
+  "version": "0.1.0",
+  "description": "Provides login and search API for Rutracker.org.",
+  "main": "rutracker-api.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "rutracker",
+    "api"
+  ],
+  "author": "Nikita Gusarov",
+  "license": "MIT",
+  "dependencies": {
+    "cheerio": "^0.19.0",
+    "querystring": "^0.2.0",
+    "windows-1251": "^0.1.2"
+  }
+}
