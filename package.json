@@ -14,7 +14,17 @@
   "license": "MIT",
   "dependencies": {
     "cheerio": "^0.19.0",
+    "events": "^1.1.0",
+    "http": "0.0.0",
     "querystring": "^0.2.0",
     "windows-1251": "^0.1.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nikityy/Rutracker-API.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nikityy/Rutracker-API/issues"
+  },
+  "homepage": "https://github.com/nikityy/Rutracker-API#readme"
 }
