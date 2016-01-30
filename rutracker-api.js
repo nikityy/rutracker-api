@@ -5,11 +5,6 @@ var http = require('http'),
 	EventEmitter = require('events');
 
 function RutrackerApi(data) {
-	var api = new EventEmitter();
-
-	for (prop in api)
-		this[prop] = api[prop];
-
 	this.host = 'rutracker.org';
 	this.login_host = 'login.rutracker.org';
 	this.login_path = '/forum/login.php';
@@ -25,6 +20,8 @@ function RutrackerApi(data) {
 
 	return this;
 };
+
+RutrackerApi.prototype = new EventEmitter();
 
 RutrackerApi.prototype.login = function(username, password) {
 	var postData = querystring.stringify({
@@ -48,14 +45,15 @@ RutrackerApi.prototype.login = function(username, password) {
 	var	req = http.request(options, function(res) {
 		if (res.statusCode == "302") {
 			that.cookie = res.headers['set-cookie'][0];
-			that.emit('login', true);
+			that.emit('login');
+		} else {
+			that.emit('login-error');
 		}
 	});
 
 	req.write(postData);
 	req.end();
 };
-
 
 RutrackerApi.prototype.search = function(_query, _callback) {
 	if (typeof this.cookie != "string") {
@@ -101,35 +99,37 @@ RutrackerApi.prototype.search = function(_query, _callback) {
 	});
 
 	req.end();
-}
+};
 
 RutrackerApi.prototype.parseSearch = function(rawHtml, callback) {
 	var $ = cheerio.load(rawHtml, {decodeEntities: false}),
 		tracks = $("#tor-tbl tbody").find('tr'),
 		results = [],
-		length = tracks.length;
+		length = tracks.length,
+		bytes_in_gigabyte = 1024 * 1024 * 1024;
 
 	for (var i = 0; i < length; i++) {
 		// Ah-m... Couldn't find any better method
 		var document = tracks.find('td'),
-			state = document.next(),
+			state    = document.next(),
 			category = state.next(),
-			title = category.next()
-			author = title.next(),
-			size = author.next(),
-			seeds = size.next(),
-			leechs = seeds.next();
+			title    = category.next()
+			author   = title.next(),
+			size     = author.next(),
+			seeds    = size.next(),
+			leechs   = seeds.next();
 
 		results.push({
-			'state': state.attr('title'),
-			'category': category.find(".f-name a").html(),
-			'title': title.find("div a ").html(),
-			'author': author.find("div a ").html(),
-			'size': size.find("a").html().replace("&nbsp;", "").replace(" &#8595;", ""),
-			'seeds': seeds.find("b").html(),
-			'leechs': leechs.find("b").html(),
-			'url': "http://" + this.host + "/forum/" + title.find("div a").attr("href")
-		})
+			'state'    : state.attr('title'),
+			'id'       : title.find("div a").attr('data-topic_id'),
+			'category' : category.find(".f-name a").html(),
+			'title'    : title.find("div a ").html(),
+			'author'   : author.find("div a ").html(),
+			'size'     : formatSize( size.find("*").html() ),
+			'seeds'    : seeds.find("b").html(),
+			'leechs'   : leechs.find("b").html(),
+			'url'      : "http://" + this.host + "/forum/" + title.find("div a").attr("href")
+		});
 
 		tracks = tracks.next();
 	}
@@ -138,6 +138,11 @@ RutrackerApi.prototype.parseSearch = function(rawHtml, callback) {
 		callback(results)
 	} else {
 		return results;
+	}
+
+	function formatSize(size_in_bytes) {
+		var size_in_megabytes = size_in_bytes / (1000 * 1000 * 1000); 
+		return ('' + size_in_megabytes).slice(0, 4) + " GB";
 	}
 };
 

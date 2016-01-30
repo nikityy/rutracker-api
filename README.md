@@ -44,10 +44,11 @@ rutracker.search(query, callback);
 [
 	{ 
 		state: 'проверено',
+        id: 'XXXXXXXX'
     	category: 'CATEGORY_NAME',
     	title: 'TITLE',
     	author: 'AUTHOR_NAME',
-    	size: '1.46GB',
+    	size: '1.07 GB',
     	seeds: '7123',
     	leechs: '275',
     	url: 'rutracker.org/forum/viewtopic.php?t=XXXXXX' 
@@ -60,3 +61,6 @@ rutracker.search(query, callback);
 ## События
 ### login
 Срабатывает при успешной авторизации приложения. 
+
+### login-error
+Срабатывает, если указанные логин и пароль не подошли. 
