@@ -19,8 +19,8 @@ var username = 'username',
 
 // Вариант №1: при вызове конструктора
 var rutracker = new RutrackerApi({
-	username: username, 
-	password: password
+    username: username, 
+    password: password
 });
 
 // Вариант №2: с помощью метода 'login'
@@ -32,9 +32,7 @@ rutracker.login(username, password);
 
 ```js
 var query = "YOUR QUERY HERE",
-	callback = function(data) {
-		console.log(data);
-	};
+    callback = console.log.bind(console);
 
 rutracker.search(query, callback);
 ```
@@ -42,17 +40,17 @@ rutracker.search(query, callback);
 В callback будет передан объект вида:
 ```js
 [
-	{ 
-		state: 'проверено',
-        id: 'XXXXXXXX'
-    	category: 'CATEGORY_NAME',
-    	title: 'TITLE',
-    	author: 'AUTHOR_NAME',
-    	size: '1.07 GB',
-    	seeds: '7123',
-    	leechs: '275',
-    	url: 'rutracker.org/forum/viewtopic.php?t=XXXXXX' 
-    }, ...
+  { 
+    state: 'проверено',
+    id: 'XXXXXXXX'
+    category: 'CATEGORY_NAME',
+    title: 'TITLE',
+    author: 'AUTHOR_NAME',
+    size: '1.07 GB',
+    seeds: '7123',
+    leechs: '275',
+    url: 'rutracker.org/forum/viewtopic.php?t=XXXXXX' 
+  }, ...
 ]
 ```
 
@@ -63,4 +61,7 @@ rutracker.search(query, callback);
 Срабатывает при успешной авторизации приложения. 
 
 ### login-error
-Срабатывает, если указанные логин и пароль не подошли. 
+Срабатывает, если указанные логин и пароль не подошли.
+
+### error
+Стандартное событие. Наиболее вероятные причины возникновения — истечение времени ожидания ответа от сервера или отсутствие доступа к серверам RuTracker. 
