@@ -19,7 +19,7 @@ var username = 'username',
 
 // Вариант №1: при вызове конструктора
 var rutracker = new RutrackerApi({
-    username: username, 
+    username: username,
     password: password
 });
 
@@ -40,7 +40,7 @@ rutracker.search(query, callback);
 В callback будет передан объект вида:
 ```js
 [
-  { 
+  {
     state: 'проверено',
     id: 'XXXXXXXX'
     category: 'CATEGORY_NAME',
@@ -49,19 +49,29 @@ rutracker.search(query, callback);
     size: '1.07 GB',
     seeds: '7123',
     leechs: '275',
-    url: 'rutracker.org/forum/viewtopic.php?t=XXXXXX' 
+    url: 'rutracker.org/forum/viewtopic.php?t=XXXXXX'
   }, ...
 ]
 ```
 
-Парсинг осуществляется с помощью метода ```parseSearch```. При желании можно сделать так, чтобы в callback передавалась сырая HTML-страница. Для этого свойству ```rutracker.parseData``` нужно присвоить значение ```false```. 
+Парсинг осуществляется с помощью метода ```parseSearch```. При желании можно сделать так, чтобы в callback передавалась сырая HTML-страница. Для этого свойству ```rutracker.parseData``` нужно присвоить значение ```false```.
+
+Также доступен метод ``download`` для получения торрент файла. Метод вернет FileReadableStream для дальнейшей работы с файлом.
+
+```js
+// 12345 является идентификатором торрента (поле id)
+rutracker.download('12345', function(response)
+{
+    // response является fs.ReadStream
+});
+```
 
 ## События
 ### login
-Срабатывает при успешной авторизации приложения. 
+Срабатывает при успешной авторизации приложения.
 
 ### login-error
 Срабатывает, если указанные логин и пароль не подошли.
 
 ### error
-Стандартное событие. Наиболее вероятные причины возникновения — истечение времени ожидания ответа от сервера или отсутствие доступа к серверам RuTracker. 
+Стандартное событие. Наиболее вероятные причины возникновения — истечение времени ожидания ответа от сервера или отсутствие доступа к серверам RuTracker.
