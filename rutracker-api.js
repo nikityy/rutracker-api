@@ -172,6 +172,11 @@ RutrackerApi.prototype.parseSearch = function(rawHtml, callback) {
     tracks = tracks.next();
   }
 
+  // Handle case where search has no results
+  results = results.filter(function(x) {
+    return typeof x.id !== 'undefined';
+  });
+
   if (callback) {
     callback(results);
   } else {
