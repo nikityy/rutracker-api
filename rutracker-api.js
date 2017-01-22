@@ -6,7 +6,6 @@ var http = require('http'),
 
 function RutrackerApi(data) {
   this.host = 'rutracker.org';
-  this.login_host = 'login.rutracker.org';
   this.login_path = '/forum/login.php';
   this.search_path = '/forum/tracker.php';
   this.download_path = '/forum/dl.php';
@@ -32,7 +31,7 @@ RutrackerApi.prototype.login = function(username, password) {
   });
 
   var options = {
-    hostname: this.login_host,
+    hostname: this.host,
     port: 80,
     path: this.login_path,
     method: 'POST',
