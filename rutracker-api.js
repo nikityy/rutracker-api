@@ -9,6 +9,7 @@ function RutrackerApi(data) {
   this.login_path = '/forum/login.php';
   this.search_path = '/forum/tracker.php';
   this.download_path = '/forum/dl.php';
+  this.item_path = '/forum/viewtopic.php';
   this.cookie = null;
   this.parseData = true;
 
@@ -103,6 +104,56 @@ RutrackerApi.prototype.search = function(_query, _callback) {
   req.end();
 };
 
+
+RutrackerApi.prototype.getMagnetLink = function(_id, _callback) {
+  if (typeof this.cookie != 'string') {
+    throw Error('Unauthorized: Use `login` method first');
+  }
+  else if (typeof _id == 'undefined') {
+    throw TypeError('Expected at least one argument');
+  }
+
+  var callback = _callback || function() {},
+      path = this.item_path + '?t=' + _id;
+
+  var options = {
+    hostname: this.host,
+    port: 80,
+    path: path,
+    method: 'GET',
+    headers: {
+      'Cookie': this.cookie
+    }
+  };
+
+  var that = this;
+  var req = http.request(options, function(res) {
+    if (res.statusCode == '200') {
+      var data = '';
+      res.setEncoding('binary');
+      res.on('data', function(x) {
+        data = data + windows1251.decode(x, {mode: 'html'});
+      });
+      res.on('end', function() {
+        if (that.parseData === true) {
+          var $ = cheerio.load(data, {decodeEntities: false});
+          var magnetLink = $('.magnet-link').attr('href');
+          callback(magnetLink);
+        } else {
+          callback(data);
+        }
+      });
+    }
+    else {
+      throw Error('HTTP code is ' + res.statusCode);
+    }
+  });
+
+  req.on('error', function(err) { that.emit('error', err); });
+  req.end();
+
+}
+
 RutrackerApi.prototype.download = function(_id, _callback) {
   if (typeof this.cookie != 'string') {
     throw Error('Unauthorized: Use `login` method first');
@@ -137,7 +188,6 @@ RutrackerApi.prototype.download = function(_id, _callback) {
   req.on('error', function(err) { that.emit('error', err); });
   req.end();
 };
-
 
 RutrackerApi.prototype.parseSearch = function(rawHtml, callback) {
   var $ = cheerio.load(rawHtml, {decodeEntities: false}),
