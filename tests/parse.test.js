@@ -2,7 +2,7 @@ const RutrackerApi = require('../rutracker-api');
 const fs = require('fs');
 const windows1251 = require('windows-1251');
 
-test('parses search results', () => {
+test('returns array of search results', () => {
   expect.assertions(3);
 
   const resultsPage = fs.readFileSync('./tests/mocks/search_results_page.html').toString('binary');
@@ -33,5 +33,17 @@ test('parses search results', () => {
       title: "[DTSCD][DVDA] Metallica - Black Album - 2005",
       url: "http://rutracker.org/forum/viewtopic.php?t=88068",
     });
+  });
+});
+
+test('returns empty array if no results', () => {
+  expect.assertions(1);
+
+  const noResultsPage = fs.readFileSync('./tests/mocks/no_results_page.html').toString('binary');
+  const noResultsPageHtml = windows1251.decode(noResultsPage, {mode: 'html'})
+  const rutracker = new RutrackerApi();
+
+  rutracker.parseSearch(noResultsPageHtml, results => {
+    expect(results).toHaveLength(0);
   });
 });
