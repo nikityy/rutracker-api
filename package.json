@@ -50,5 +50,8 @@
     }
   ],
   "directories": {},
-  "_resolved": "https://registry.npmjs.org/rutracker-api/-/rutracker-api-0.1.2.tgz"
+  "_resolved": "https://registry.npmjs.org/rutracker-api/-/rutracker-api-0.1.2.tgz",
+  "devDependencies": {
+    "jest": "^22.3.0"
+  }
 }
