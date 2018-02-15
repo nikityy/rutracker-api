@@ -4,7 +4,7 @@
   "description": "Provides login and search API for Rutracker.org.",
   "main": "rutracker-api.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "keywords": [
     "rutracker",
