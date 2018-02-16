@@ -61,10 +61,34 @@ test("throws if login was made with incorrect credentials", () => {
   );
 });
 
-// test("throws if attempting to search when not authorized", () => {
-//   expect.assertions(1);
-//
-//   const pageProvider = new PageProvider();
-//
-//   expect(() => pageProvider.search('query')).toThrowError();
-// });
+test("correctly making search request", () => {
+  expect.assertions(2);
+
+  const pageProvider = new PageProvider();
+  const request = jest.fn();
+  const cookie = "cookie";
+  const query = "query";
+
+  request.mockReturnValueOnce(Promise.resolve({ status: 200 }));
+  pageProvider.authorized = true;
+  pageProvider.cookie = cookie;
+  pageProvider.request = request;
+
+  pageProvider.search(query);
+
+  expect(request).toHaveBeenCalledTimes(1);
+  expect(request).toHaveBeenCalledWith({
+    headers: { Cookie: cookie },
+    method: "POST",
+    responseType: "arraybuffer",
+    url: `http://rutracker.org/forum/tracker.php?nm=${query}`
+  });
+});
+
+test("throws if attempting to search when not authorized", () => {
+  expect.assertions(1);
+
+  const pageProvider = new PageProvider();
+
+  expect(() => pageProvider.search("query")).toThrowError();
+});
