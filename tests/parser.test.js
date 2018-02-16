@@ -1,7 +1,7 @@
 const Parser = require("../lib/parser");
 const utils = require("./utils");
 
-test("returns array of search results", () => {
+test("parseSearch returns array of search results", () => {
   expect.assertions(3);
 
   const resultsPageHtml = utils.readMockPage('search_results_page');
@@ -34,7 +34,7 @@ test("returns array of search results", () => {
   });
 });
 
-test("returns empty array if no results", () => {
+test("parseSearch returns empty array if no results", () => {
   expect.assertions(1);
 
   const noResultsPageHtml = utils.readMockPage('no_results_page');
@@ -42,4 +42,14 @@ test("returns empty array if no results", () => {
   const results = parser.parseSearch(noResultsPageHtml);
 
   expect(results).toHaveLength(0);
+});
+
+test("parseMagnetLink returns magnet link", () => {
+  expect.assertions(1);
+
+  const threadHtml = utils.readMockPage('thread');
+  const parser = new Parser();
+  const magnetLink = parser.parseMagnetLink(threadHtml);
+
+  expect(magnetLink).toEqual('magnet:?xt=urn:btih:4904EC7AB6106C47B317BA10C688941A9F2202BF&tr=http%3A%2F%2Fbt4.t-ru.org%2Fann%3Fmagnet');
 });
