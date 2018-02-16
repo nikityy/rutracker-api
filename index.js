@@ -1,12 +1,30 @@
-const http = require('http');
-const querystring = require('querystring');
-const windows1251 = require('windows-1251');
-const EventEmitter = require('events');
-const Parser = require('./lib/parser');
+const Parser = require("./lib/parser");
+const PageProvider = require("./lib/parser");
 
 class RutrackerApi {
   constructor() {
     this.parser = new Parser();
+    this.pageProvider = new PageProvider();
+  }
+
+  login({ username, password }) {
+    return this.pageProvider.login(username, password);
+  }
+
+  search(query) {
+    return this.pageProvider
+      .search(query)
+      .then(html => this.parser.parseSearch(html));
+  }
+
+  download(id) {
+    return this.pageProvider.torrentFile(id);
+  }
+
+  getMagnetLink(id) {
+    return this.pageProvider
+      .thread(id)
+      .then(html => this.parser.parseMagnetLink(html));
   }
 }
 
