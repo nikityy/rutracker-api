@@ -9,7 +9,7 @@ test("correctly making login request", () => {
   const username = "aaa";
   const password = "bbb";
 
-  request.mockReturnValueOnce(Promise.resolve());
+  request.mockReturnValueOnce(Promise.reject());
   pageProvider.request = request;
 
   pageProvider.login(username, password);
@@ -19,8 +19,8 @@ test("correctly making login request", () => {
     data: `login_username=${username}&login_password=${password}&login=%D0%92%D1%85%D0%BE%D0%B4`,
     maxRedirects: 0,
     method: "POST",
-    responseType: "arraybuffer",
-    url: "http://rutracker.org/forum/login.php"
+    url: "http://rutracker.org/forum/login.php",
+    validateStatus: request.mock.calls[0][0].validateStatus
   });
 });
 
@@ -32,7 +32,14 @@ test("resolves if login was made with correct credentials", () => {
   const username = "aaa";
   const password = "bbb";
 
-  request.mockReturnValueOnce(Promise.resolve({ status: 302 }));
+  request.mockReturnValueOnce(
+    Promise.resolve({
+      status: 302,
+      headers: {
+        "set-cookie": "COOKIE"
+      }
+    })
+  );
   pageProvider.request = request;
 
   expect(pageProvider.login(username, password)).resolves.toBe(true);
@@ -46,8 +53,18 @@ test("throws if login was made with incorrect credentials", () => {
   const username = "aaa";
   const password = "bbb";
 
-  request.mockReturnValueOnce(Promise.resolve({ status: 200 }));
+  request.mockReturnValueOnce(Promise.reject({ status: 200 }));
   pageProvider.request = request;
 
-  expect(pageProvider.login(username, password)).rejects.toThrow('Incorrect username or password');
+  expect(pageProvider.login(username, password)).rejects.toThrow(
+    "Incorrect username or password"
+  );
 });
+
+// test("throws if attempting to search when not authorized", () => {
+//   expect.assertions(1);
+//
+//   const pageProvider = new PageProvider();
+//
+//   expect(() => pageProvider.search('query')).toThrowError();
+// });
