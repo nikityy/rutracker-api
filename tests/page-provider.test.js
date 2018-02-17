@@ -84,10 +84,74 @@ test("correctly making search request", () => {
   });
 });
 
-test("throws if attempting to search when not authorized", () => {
+test("rejects if attempting to search when not authorized", () => {
   expect.assertions(1);
 
   const pageProvider = new PageProvider();
 
-  expect(() => pageProvider.search("query")).toThrowError();
+  expect(pageProvider.search("query")).rejects.toThrowError();
+});
+
+test("correctly making thread request", () => {
+  expect.assertions(2);
+
+  const pageProvider = new PageProvider();
+  const request = jest.fn();
+  const cookie = "cookie";
+  const id = "123";
+
+  request.mockReturnValueOnce(Promise.resolve({ status: 200 }));
+  pageProvider.authorized = true;
+  pageProvider.cookie = cookie;
+  pageProvider.request = request;
+
+  pageProvider.thread(id);
+
+  expect(request).toHaveBeenCalledTimes(1);
+  expect(request).toHaveBeenCalledWith({
+    headers: { Cookie: cookie },
+    method: "GET",
+    responseType: "arraybuffer",
+    url: `http://rutracker.org/forum/viewtopic.php?t=${id}`
+  });
+});
+
+test("rejects if attempting to fetch thread when not authorized", () => {
+  expect.assertions(1);
+
+  const pageProvider = new PageProvider();
+
+  expect(pageProvider.thread("123")).rejects.toThrowError();
+});
+
+test("correctly making torrent file request", () => {
+  expect.assertions(2);
+
+  const pageProvider = new PageProvider();
+  const request = jest.fn();
+  const cookie = "cookie";
+  const id = "123";
+
+  request.mockReturnValueOnce(Promise.resolve({ status: 200 }));
+  pageProvider.authorized = true;
+  pageProvider.cookie = cookie;
+  pageProvider.request = request;
+
+  pageProvider.torrentFile(id);
+
+  expect(request).toHaveBeenCalledTimes(1);
+  expect(request).toHaveBeenCalledWith({
+    headers: { Cookie: cookie },
+    method: "GET",
+    responseType: "stream",
+    url: `http://rutracker.org/forum/dl.php?t=${id}`
+  });
+});
+
+test("rejects if attempting to fetch torrent file when not authorized", () => {
+  expect.assertions(1);
+
+  const pageProvider = new PageProvider();
+
+  expect(pageProvider.torrentFile("123")).rejects.toThrowError();
 });
