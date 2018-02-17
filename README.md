@@ -2,76 +2,76 @@
 Данный модуль позволяет искать по раздачам трекера Rutracker.org. Поскольку поиск запрещён для незарегистрированных пользователей, также поддерживаетcя и авторизация.
 
 ## Установка
-Установите пакет в нужную директорию с помощью ```npm install rutracker-api``` (предполагается, что Node.js и пакетный менеждер npm у вас уже установлены). После установки модуля и загрузки его зависимостей, Rutracker API готов к использованию.
+Запусти ```npm install rutracker-api``` (предполагается, что Node.js и пакетный менеждер npm у вас уже установлены). Для работы требуется версия Node.js >= 6.
 
-## Использование
-В первую очередь необходимо скопировать папку с Rutracker API в ваш проект. Далее, подключите модуль в нужном вам JS-файле:
+## API
+
+### RutrackerApi#login({ username, password })
+Возвращает Promise<>. Promise упадет, если были введены неправильные `username` или `password`.
 
 ```js
-var RutrackerApi = require('rutracker-api');
+const RutrackerApi = require('rutracker-api');
+const rutracker = new RutrackerApi();
+
+rutracker.login({ username: '', password: '' })
+  .then(() => {
+    console.log('Authorized');
+  })
+  .catch(err => console.error(err));
 ```
 
-Следующий этап — авторизация приложения. Сделать это можно непосредственно при вызове конструктора, либо позже — с помощью метода объекта ```login```.
+### RutrackerApi#search(query)
+Возвращает Promise<[Torrent](#torrent)[]>.
 
 ```js
-var username = 'username',
-    password = 'password';
+const RutrackerApi = require('rutracker-api');
+const rutracker = new RutrackerApi();
 
-// Вариант №1: при вызове конструктора
-var rutracker = new RutrackerApi({
-    username: username,
-    password: password
-});
-
-// Вариант №2: с помощью метода 'login'
-var rutracker = new RutrackerApi();
-rutracker.login(username, password);
+rutracker.login({ username: '', password: '' })
+  .then(() => rutracker.query('your query'))
+  .then(torrents => console.log(torrents));
 ```
 
-Помните, что для синхронизации вы можете использовать событие ```login```. После того, как приложение получило токен, мы можем начать искать раздачи. Поиск осуществляется через метод ```search```:
+### RutrackerApi#download(torrentId)
+Возвращает Promise<[fs.ReadableStream](https://nodejs.org/api/stream.html#stream_readable_streams)>.
 
 ```js
-var query = "YOUR QUERY HERE",
-    callback = console.log.bind(console);
+const fs = require('fs');
+const RutrackerApi = require('rutracker-api');
+const rutracker = new RutrackerApi();
 
-rutracker.search(query, callback);
+rutracker.login({ username: '', password: '' })
+  .then(() => rutracker.download('id'))
+  .then(stream => stream.pipe(fs.createWriteStream('filename.torrent')));
 ```
 
-В callback будет передан объект вида:
+### RutrackerApi#getMagnetLink(torrentId)
+Возвращает Promise<string>.
+
 ```js
-[
-  {
-    state: 'проверено',
-    id: 'XXXXXXXX'
-    category: 'CATEGORY_NAME',
-    title: 'TITLE',
-    author: 'AUTHOR_NAME',
-    size: '1.07 GB',
-    seeds: '7123',
-    leechs: '275',
-    url: 'rutracker.org/forum/viewtopic.php?t=XXXXXX'
-  }, ...
-]
+const RutrackerApi = require('rutracker-api');
+const rutracker = new RutrackerApi();
+
+rutracker.login({ username: '', password: '' })
+  .then(() => rutracker.getMagnetLink('id'))
+  .then(uri => console.log(uri));
 ```
 
-Парсинг осуществляется с помощью метода ```parseSearch```. При желании можно сделать так, чтобы в callback передавалась сырая HTML-страница. Для этого свойству ```rutracker.parseData``` нужно присвоить значение ```false```.
 
-Также доступен метод ``download`` для получения торрент файла. Метод вернет FileReadableStream для дальнейшей работы с файлом.
+## Типы
 
+### Torrent
+Объект следующей формы:
 ```js
-// 12345 является идентификатором торрента (поле id)
-rutracker.download('12345', function(response)
 {
-    // response является fs.ReadStream
-});
+  state: 'проверено',
+  id: 'XXXXXXXX'
+  category: 'CATEGORY_NAME',
+  title: 'TITLE',
+  author: 'AUTHOR_NAME',
+  size: '1.07 GB',
+  seeds: '7123',
+  leechs: '275',
+  url: 'rutracker.org/forum/viewtopic.php?t=XXXXXX'
+}
 ```
-
-## События
-### login
-Срабатывает при успешной авторизации приложения.
-
-### login-error
-Срабатывает, если указанные логин и пароль не подошли.
-
-### error
-Стандартное событие. Наиболее вероятные причины возникновения — истечение времени ожидания ответа от сервера или отсутствие доступа к серверам RuTracker.
