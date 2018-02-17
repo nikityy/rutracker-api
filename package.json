@@ -4,7 +4,8 @@
   "description": "Provides login and search API for Rutracker.org.",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "npm run lint && jest",
+    "lint": "./node_modules/.bin/eslint ."
   },
   "keywords": [
     "rutracker",

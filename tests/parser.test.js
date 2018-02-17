@@ -15,7 +15,7 @@ test("parseSearch returns array of search results", () => {
     id: "5515973",
     leechs: "0",
     seeds: "2",
-    size: "3.02 GB",
+    size: "3.03 GB",
     state: "проверено",
     title:
       "(Heavy Thrash Metal) [LP] [24/192] Metallica - Metallica (Black Album) - 27 Jul 2015, FLAC (image+.cue)",
