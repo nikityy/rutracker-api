@@ -21,7 +21,7 @@ rutracker.login({ username: '', password: '' })
 ```
 
 ### RutrackerApi#search(query)
-Возвращает Promise<[#Torrent](Torrent)[]>.
+Возвращает Promise<[Torrent](#torrent)[]>.
 
 ```js
 const RutrackerApi = require('rutracker-api');
@@ -33,7 +33,7 @@ rutracker.login({ username: '', password: '' })
 ```
 
 ### RutrackerApi#download(torrentId)
-Возвращает Promise<[https://nodejs.org/api/stream.html#stream_readable_streams](fs.ReadableStream)>.
+Возвращает Promise<[fs.ReadableStream](https://nodejs.org/api/stream.html#stream_readable_streams)>.
 
 ```js
 const fs = require('fs');
