@@ -2,7 +2,7 @@
   "name": "rutracker-api",
   "version": "0.2.0",
   "description": "Provides login and search API for Rutracker.org.",
-  "main": "rutracker-api.js",
+  "main": "index.js",
   "scripts": {
     "test": "jest"
   },

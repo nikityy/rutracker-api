@@ -1,5 +1,4 @@
 const PageProvider = require("../lib/page-provider");
-const utils = require("./utils");
 
 test("correctly making login request", () => {
   expect.assertions(2);
@@ -53,7 +52,7 @@ test("throws if login was made with incorrect credentials", () => {
   const username = "aaa";
   const password = "bbb";
 
-  request.mockReturnValueOnce(Promise.reject({ status: 200 }));
+  request.mockReturnValueOnce(Promise.reject(Error()));
   pageProvider.request = request;
 
   expect(pageProvider.login(username, password)).rejects.toThrow(
