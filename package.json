@@ -17,9 +17,16 @@
   "dependencies": {
     "axios": "^0.17.1",
     "cheerio": "^0.19.0",
-    "events": "^1.1.0",
-    "querystring": "^0.2.0",
     "windows-1251": "^0.1.2"
+  },
+  "devDependencies": {
+    "eslint": "^4.18.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-prettier": "^2.6.0",
+    "jest": "^22.3.0",
+    "prettier": "^1.10.2"
   },
   "repository": {
     "type": "git",
@@ -29,29 +36,10 @@
     "url": "https://github.com/nikityy/Rutracker-API/issues"
   },
   "homepage": "https://github.com/nikityy/Rutracker-API#readme",
-  "gitHead": "9c33ec0aa4f427b96dbf65e174a87887942bba52",
-  "_id": "rutracker-api@0.1.2",
-  "_shasum": "22f8c42b891865f41c4344a758e60abbbfaec598",
-  "_from": "rutracker-api@0.1.2",
-  "_npmVersion": "2.14.4",
-  "_nodeVersion": "4.1.1",
-  "_npmUser": {
-    "name": "nikityy",
-    "email": "nickgusarov@gmail.com"
-  },
-  "dist": {
-    "shasum": "22f8c42b891865f41c4344a758e60abbbfaec598",
-    "tarball": "http://registry.npmjs.org/rutracker-api/-/rutracker-api-0.1.2.tgz"
-  },
   "maintainers": [
     {
       "name": "nikityy",
       "email": "nickgusarov@gmail.com"
     }
-  ],
-  "directories": {},
-  "_resolved": "https://registry.npmjs.org/rutracker-api/-/rutracker-api-0.1.2.tgz",
-  "devDependencies": {
-    "jest": "^22.3.0"
-  }
+  ]
 }
