@@ -28,7 +28,7 @@ const RutrackerApi = require('rutracker-api');
 const rutracker = new RutrackerApi();
 
 rutracker.login({ username: '', password: '' })
-  .then(() => rutracker.query('your query'))
+  .then(() => rutracker.search('your query'))
   .then(torrents => console.log(torrents));
 ```
 
@@ -72,6 +72,6 @@ rutracker.login({ username: '', password: '' })
   size: '1.07 GB',
   seeds: '7123',
   leechs: '275',
-  url: 'rutracker.org/forum/viewtopic.php?t=XXXXXX'
+  url: 'http://rutracker.org/forum/viewtopic.php?t=XXXXXX'
 }
 ```
