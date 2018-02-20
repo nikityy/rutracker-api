@@ -97,7 +97,7 @@ describe('#search', () => {
     pageProvider.cookie = cookie;
     pageProvider.request = request;
 
-    pageProvider.search(query);
+    pageProvider.search({ query });
 
     expect(request).toHaveBeenCalledTimes(1);
     expect(request).toHaveBeenCalledWith({
@@ -113,7 +113,7 @@ describe('#search', () => {
 
     const pageProvider = new PageProvider();
 
-    expect(pageProvider.search("query")).rejects.toThrowError();
+    expect(pageProvider.search({ query: "query" })).rejects.toThrowError();
   });
 });
 
