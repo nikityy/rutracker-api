@@ -28,15 +28,17 @@ describe('#search', () => {
     const rutracker = new RutrackerApi();
     const query = 'query';
 
-    const search = jest.fn().mockImplementationOnce(q => Promise.resolve({ query: q }));
+    const search = jest.fn().mockImplementationOnce(q => Promise.resolve({ request: q }));
     rutracker.pageProvider.search = search;
 
     const parseSearch = jest.fn().mockImplementationOnce(html => Promise.resolve({ container: html }));
     rutracker.parser.parseSearch = parseSearch;
 
-    expect(rutracker.search(query)).resolves.toEqual({
+    expect(rutracker.search({ query })).resolves.toEqual({
       container: {
-        query
+        request: {
+          query
+        }
       }
     });
   });
