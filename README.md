@@ -20,7 +20,7 @@ rutracker.login({ username: '', password: '' })
   .catch(err => console.error(err));
 ```
 
-### RutrackerApi#search(query)
+### RutrackerApi#search({ query })
 Возвращает Promise<[Torrent](#torrent)[]>.
 
 ```js
@@ -28,7 +28,7 @@ const RutrackerApi = require('rutracker-api');
 const rutracker = new RutrackerApi();
 
 rutracker.login({ username: '', password: '' })
-  .then(() => rutracker.search('your query'))
+  .then(() => rutracker.search({ query: 'your query' }))
   .then(torrents => console.log(torrents));
 ```
 
