@@ -88,23 +88,6 @@ describe("#parseSearch", () => {
   });
 });
 
-describe("#parseState", () => {
-  const parser = new Parser();
-
-  test("parses all known states", () => {
-    expect(parser.parseState("проверено")).toEqual(Torrent.APPROVED);
-    expect(parser.parseState("не проверено")).toEqual(Torrent.NOT_APPROVED);
-    expect(parser.parseState("недооформлено")).toEqual(Torrent.NEED_EDIT);
-    expect(parser.parseState("сомнительно")).toEqual(Torrent.DUBIOUSLY);
-    expect(parser.parseState("поглощено")).toEqual(Torrent.CONSUMED);
-    expect(parser.parseState("временная")).toEqual(Torrent.TEMPORARY);
-  });
-
-  test("keeps unknown state", () => {
-    expect(parser.parseState("custom-custom")).toEqual("custom-custom");
-  });
-});
-
 describe("#parseMagnetLink", () => {
   test("returns magnet link", () => {
     expect.assertions(1);
