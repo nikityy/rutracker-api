@@ -1,4 +1,4 @@
-# rutracker-api
+# rutracker-api [![Build Status](https://travis-ci.org/nikityy/Rutracker-API.svg?branch=master)](https://travis-ci.org/nikityy/Rutracker-API)
 Позволяет искать по раздачам трекера Rutracker.org. Поскольку поиск запрещён для незарегистрированных пользователей, также поддерживаетcя и авторизация.
 
 ## Установка
@@ -65,7 +65,7 @@ rutracker.login({ username: '', password: '' })
 #### Свойства
 
 ##### id
-Тип: `string`. Уникальный идентификатор раздачи. Используйте это свойство в методах [`RutrackerApi#download`](#rutrackerapidownloadtorrentid) и [`RutrackerApi#getMagnetLink`](rutrackerapigetmagnetlinktorrentid).
+Тип: `string`. Уникальный идентификатор раздачи. Используйте это свойство в методах [`RutrackerApi#download`](#rutrackerapidownloadtorrentid) и [`RutrackerApi#getMagnetLink`](#rutrackerapigetmagnetlinktorrentid).
 
 ##### title
 Тип: `string`. Заголовок раздачи.
