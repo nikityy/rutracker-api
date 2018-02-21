@@ -28,21 +28,24 @@ describe("#login", () => {
     expect.assertions(2);
 
     const pageProvider = new PageProvider();
-    const request = jest.fn().mockReturnValue(Promise.resolve({
-      headers: {
-        'set-cookie': ['bb_session=XXX; expires=Tue, 15-Feb-2028 10:09:15 GMT; Max-Age=315360000; path=/forum/; domain=.rutracker.org; HttpOnly']
-      }
-    }));
+    const request = jest.fn().mockReturnValue(
+      Promise.resolve({
+        headers: {
+          "set-cookie": [
+            "bb_session=XXX; expires=Tue, 15-Feb-2028 10:09:15 GMT; Max-Age=315360000; path=/forum/; domain=.rutracker.org; HttpOnly"
+          ]
+        }
+      })
+    );
     const username = "aaa";
     const password = "bbb";
 
     pageProvider.request = request;
 
-    return pageProvider.login(username, password)
-      .then(() => {
-        expect(pageProvider.authorized).toBeTruthy();
-        expect(pageProvider.cookie).toEqual('bb_session=XXX')
-      });
+    return pageProvider.login(username, password).then(() => {
+      expect(pageProvider.authorized).toBeTruthy();
+      expect(pageProvider.cookie).toEqual("bb_session=XXX");
+    });
   });
 
   test("resolves if called with correct credentials", () => {
@@ -83,7 +86,7 @@ describe("#login", () => {
   });
 });
 
-describe('#search', () => {
+describe("#search", () => {
   test("making correct request", () => {
     expect.assertions(2);
 
@@ -117,7 +120,7 @@ describe('#search', () => {
   });
 });
 
-describe('#thread', () => {
+describe("#thread", () => {
   test("making correct request", () => {
     expect.assertions(2);
 
@@ -151,7 +154,7 @@ describe('#thread', () => {
   });
 });
 
-describe('#torrentFile', () => {
+describe("#torrentFile", () => {
   test("making correct request", () => {
     expect.assertions(2);
 

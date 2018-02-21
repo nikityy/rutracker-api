@@ -12,6 +12,7 @@ module.exports = {
     'prettier',
   ],
   rules: {
+    'prettier/prettier': 'error',
     'class-methods-use-this': 'off',
   },
   env: {
