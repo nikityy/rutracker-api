@@ -64,35 +64,35 @@ rutracker.login({ username: '', password: '' })
 
 #### Свойства
 
-##### id: `string`
-Уникальный идентификатор раздачи. Используйте это свойство в методах [`RutrackerApi#download`](#rutrackerapidownloadtorrentid) и [`RutrackerApi#getMagnetLink`](rutrackerapigetmagnetlinktorrentid).
+##### id
+Тип: `string`. Уникальный идентификатор раздачи. Используйте это свойство в методах [`RutrackerApi#download`](#rutrackerapidownloadtorrentid) и [`RutrackerApi#getMagnetLink`](rutrackerapigetmagnetlinktorrentid).
 
-##### title: `string`
-Заголовок раздачи.
+##### title
+Тип: `string`. Заголовок раздачи.
 
-##### author: `string`
-Имя пользователя, который создал раздачу.
+##### author
+Тип: `string`. Имя пользователя, который создал раздачу.
 
-##### category: `string`
-Имя категории.
+##### category
+Тип: `string`. Имя категории.
 
-##### size: `number`
-Размер раздачи в байтах.
+##### size
+Тип: `number`. Размер раздачи в байтах.
 
-##### formattedSize: `string`
-Форматированный размер раздачи, похожий на тот, что выводит сам RuTracker. Например, `"3.03 GB"`.
+##### formattedSize
+Тип: `string`. Форматированный размер раздачи, похожий на тот, что выводит сам RuTracker. Например, `"3.03 GB"`.
 
-##### seeds: `number`
-Количество активных сидеров.
+##### seeds
+Тип: `number`. Количество активных сидеров.
 
-##### leeches: `number`
-Количество активных личеров.
+##### leeches
+Тип: `number`. Количество активных личеров.
 
-##### url: `string`
-Ссылка на страницу торрента.
+##### url
+Тип: `string`. Ссылка на страницу торрента.
 
-##### state: `string`
-Текущий статус раздачи. Для сравнения используйте статические свойства объекта Torrent.
+##### state
+Тип: `string`. Текущий статус раздачи. Для сравнения используйте статические свойства объекта Torrent.
 ```js
 const approvedTorrents = torrents.filter(torrent => torrent.state === Torrent.APPROVED);
 ```
