@@ -1,8 +1,9 @@
 const Parser = require("../lib/parser");
+const Torrent = require("../lib/torrent");
 const utils = require("./utils");
 
-describe('#parseSearch', () => {
-  const resultsPageHtml = utils.readMockPage('search_results_page');
+describe("#parseSearch", () => {
+  const resultsPageHtml = utils.readMockPage("search_results_page");
   const parser = new Parser();
   const results = parser.parseSearch(resultsPageHtml);
 
@@ -21,7 +22,9 @@ describe('#parseSearch', () => {
   test("parses title", () => {
     expect.assertions(1);
 
-    expect(results[30].title).toEqual("[DTSCD][DVDA] Metallica - Black Album - 2005");
+    expect(results[30].title).toEqual(
+      "[DTSCD][DVDA] Metallica - Black Album - 2005"
+    );
   });
 
   test("parses category", () => {
@@ -59,7 +62,7 @@ describe('#parseSearch', () => {
   test("parses state", () => {
     expect.assertions(1);
 
-    expect(results[0].state).toEqual("проверено");
+    expect(results[0].state).toEqual(Torrent.APPROVED);
   });
 
   test("parses size", () => {
@@ -78,22 +81,40 @@ describe('#parseSearch', () => {
   test("returns empty array if no results", () => {
     expect.assertions(1);
 
-    const noResultsPageHtml = utils.readMockPage('no_results_page');
-    const parser = new Parser();
-    const results = parser.parseSearch(noResultsPageHtml);
+    const noResultsPageHtml = utils.readMockPage("no_results_page");
+    const noResults = parser.parseSearch(noResultsPageHtml);
 
-    expect(results).toHaveLength(0);
+    expect(noResults).toHaveLength(0);
   });
 });
 
-describe('#parseMagnetLink', () => {
+describe("#parseState", () => {
+  const parser = new Parser();
+
+  test("parses all known states", () => {
+    expect(parser.parseState("проверено")).toEqual(Torrent.APPROVED);
+    expect(parser.parseState("не проверено")).toEqual(Torrent.NOT_APPROVED);
+    expect(parser.parseState("недооформлено")).toEqual(Torrent.NEED_EDIT);
+    expect(parser.parseState("сомнительно")).toEqual(Torrent.DUBIOUSLY);
+    expect(parser.parseState("поглощено")).toEqual(Torrent.CONSUMED);
+    expect(parser.parseState("временная")).toEqual(Torrent.TEMPORARY);
+  });
+
+  test("keeps unknown state", () => {
+    expect(parser.parseState("custom-custom")).toEqual("custom-custom");
+  });
+});
+
+describe("#parseMagnetLink", () => {
   test("returns magnet link", () => {
     expect.assertions(1);
 
-    const threadHtml = utils.readMockPage('thread');
+    const threadHtml = utils.readMockPage("thread");
     const parser = new Parser();
     const magnetLink = parser.parseMagnetLink(threadHtml);
 
-    expect(magnetLink).toEqual('magnet:?xt=urn:btih:4904EC7AB6106C47B317BA10C688941A9F2202BF&tr=http%3A%2F%2Fbt4.t-ru.org%2Fann%3Fmagnet');
+    expect(magnetLink).toEqual(
+      "magnet:?xt=urn:btih:4904EC7AB6106C47B317BA10C688941A9F2202BF&tr=http%3A%2F%2Fbt4.t-ru.org%2Fann%3Fmagnet"
+    );
   });
 });
