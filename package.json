@@ -31,12 +31,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nikityy/Rutracker-API.git"
+    "url": "git+https://github.com/nikityy/rutracker-api.git"
   },
   "bugs": {
-    "url": "https://github.com/nikityy/Rutracker-API/issues"
+    "url": "https://github.com/nikityy/rutracker-api/issues"
   },
-  "homepage": "https://github.com/nikityy/Rutracker-API#readme",
+  "homepage": "https://github.com/nikityy/rutracker-api#readme",
   "maintainers": [
     {
       "name": "nikityy",
