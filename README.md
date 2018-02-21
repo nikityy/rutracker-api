@@ -1,5 +1,5 @@
-# Rutracker API для Node.js
-Данный модуль позволяет искать по раздачам трекера Rutracker.org. Поскольку поиск запрещён для незарегистрированных пользователей, также поддерживаетcя и авторизация.
+# rutracker-api
+Позволяет искать по раздачам трекера Rutracker.org. Поскольку поиск запрещён для незарегистрированных пользователей, также поддерживаетcя и авторизация.
 
 ## Установка
 Запусти ```npm install rutracker-api``` (предполагается, что Node.js и пакетный менеждер npm у вас уже установлены). Для работы требуется версия Node.js >= 6.
@@ -61,17 +61,58 @@ rutracker.login({ username: '', password: '' })
 ## Типы
 
 ### Torrent
-Объект следующей формы:
+
+#### Свойства
+
+##### id: `string`
+Уникальный идентификатор раздачи. Используйте это свойство в методах [`RutrackerApi#download`](#rutrackerapidownloadtorrentid) и [`RutrackerApi#getMagnetLink`](rutrackerapigetmagnetlinktorrentid).
+
+##### title: `string`
+Заголовок раздачи.
+
+##### author: `string`
+Имя пользователя, который создал раздачу.
+
+##### category: `string`
+Имя категории.
+
+##### size: `number`
+Размер раздачи в байтах.
+
+##### formattedSize: `string`
+Форматированный размер раздачи, похожий на тот, что выводит сам RuTracker. Например, `"3.03 GB"`.
+
+##### seeds: `number`
+Количество активных сидеров.
+
+##### leeches: `number`
+Количество активных личеров.
+
+##### url: `string`
+Ссылка на страницу торрента.
+
+##### state: `string`
+Текущий статус раздачи. Для сравнения используйте статические свойства объекта Torrent.
 ```js
-{
-  state: 'проверено',
-  id: 'XXXXXXXX'
-  category: 'CATEGORY_NAME',
-  title: 'TITLE',
-  author: 'AUTHOR_NAME',
-  size: '1.07 GB',
-  seeds: '7123',
-  leechs: '275',
-  url: 'http://rutracker.org/forum/viewtopic.php?t=XXXXXX'
-}
+const approvedTorrents = torrents.filter(torrent => torrent.state === Torrent.APPROVED);
 ```
+
+#### Статические свойства
+
+##### Torrent.APPROVED
+Константа для статуса `проверено`.
+
+##### Torrent.NOT_APPROVED
+Константа для статуса `не проверено`.
+
+##### Torrent.NEED_EDIT
+Константа для статуса `недооформлено`.
+
+##### Torrent.DUBIOUSLY
+Константа для статуса `сомнительно`.
+
+##### Torrent.CONSUMED
+Константа для статуса `поглощена`.
+
+##### Torrent.TEMPORARY
+Константа для статуса `временная`.
