@@ -21,14 +21,14 @@ rutracker.login({ username: '', password: '' })
 ```
 
 ### RutrackerApi#search({ query, sort = "registered" })
-Возвращает Promise<[Torrent](#torrent)[]>. Параметр `sort` может принимать одно из следующих значений: [`"registered"`](#registered), [`"title"`](#title), [`"downloads"`](#downloads), [`"size"`](#size), [lastMessage](#lastMessage), [`"seeds"`](#seeds) или [`"leeches"`](#leeches).
+Возвращает Promise<[Torrent](#torrent)[]>. Параметр `sort` может принимать одно из следующих значений: [`"registered"`](#registered), [`"title"`](#title), [`"downloads"`](#downloads), [`"size"`](#size), `"lastMessage"`, [`"seeds"`](#seeds) или [`"leeches"`](#leeches).
 
 ```js
 const RutrackerApi = require('rutracker-api');
 const rutracker = new RutrackerApi();
 
 rutracker.login({ username: '', password: '' })
-  .then(() => rutracker.search({ query: 'your query' }))
+  .then(() => rutracker.search({ query: 'your query', sort: 'size' }))
   .then(torrents => console.log(torrents));
 ```
 
