@@ -112,9 +112,10 @@ describe("#search", () => {
     });
 
     pageProvider.search({ query, sort: "size" });
-
-    expect(request).toHaveBeenCalledTimes(2);
     expect(request.mock.calls[1][0].data).toEqual("o=7");
+
+    pageProvider.search({ query, sort: "size", order: "asc" });
+    expect(request.mock.calls[2][0].data).toEqual("o=7&s=1");
   });
 
   test("rejects if called with unknown sorting", () => {
@@ -128,6 +129,33 @@ describe("#search", () => {
     expect(
       pageProvider.search({ query: "query", sort: unknownSortField })
     ).rejects.toThrowError(ValidationError);
+  });
+
+  test("rejects if called with unknown order", () => {
+    expect.assertions(1);
+
+    const pageProvider = new PageProvider();
+    pageProvider.authorized = true;
+
+    const sort = "size";
+    const order = "123321";
+
+    expect(
+      pageProvider.search({ query: "query", sort, order })
+    ).rejects.toThrowError(ValidationError);
+  });
+
+  test("rejects if called with order but without sort", () => {
+    expect.assertions(1);
+
+    const pageProvider = new PageProvider();
+    pageProvider.authorized = true;
+
+    const order = "desc";
+
+    expect(pageProvider.search({ query: "query", order })).rejects.toThrowError(
+      ValidationError
+    );
   });
 
   test("rejects if called when not authorized", () => {
