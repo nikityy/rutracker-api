@@ -97,6 +97,12 @@ rutracker.login({ username: '', password: '' })
 const approvedTorrents = torrents.filter(torrent => torrent.state === Torrent.APPROVED);
 ```
 
+##### downloads
+Тип: `number`. Количество скачиваний торрент-файла.
+
+##### registered
+Тип: `Date`. Дата, когда торрент был зарегистрирован.
+
 #### Статические свойства
 
 ##### Torrent.APPROVED
