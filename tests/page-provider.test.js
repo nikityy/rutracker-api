@@ -104,7 +104,7 @@ describe("#search", () => {
 
     expect(request).toHaveBeenCalledTimes(1);
     expect(request).toHaveBeenCalledWith({
-      data: "o=1",
+      data: "",
       headers: { Cookie: cookie },
       method: "POST",
       responseType: "arraybuffer",
