@@ -41,7 +41,8 @@ describe("#search", () => {
     expect(rutracker.search({ query })).resolves.toEqual({
       container: {
         request: {
-          query
+          query,
+          sort: "registered"
         }
       }
     });
