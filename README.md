@@ -1,4 +1,4 @@
-# rutracker-api [![Build Status](https://travis-ci.org/nikityy/Rutracker-API.svg?branch=master)](https://travis-ci.org/nikityy/Rutracker-API)
+# rutracker-api [![Build Status](https://travis-ci.org/nikityy/rutracker-api.svg?branch=master)](https://travis-ci.org/nikityy/rutracker-api)
 Позволяет искать по раздачам трекера Rutracker.org. Поскольку поиск запрещён для незарегистрированных пользователей, также поддерживаетcя и авторизация.
 
 ## Установка
