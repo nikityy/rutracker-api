@@ -20,8 +20,8 @@ rutracker.login({ username: '', password: '' })
   .catch(err => console.error(err));
 ```
 
-### RutrackerApi#search({ query, sort = "registered" })
-Возвращает Promise<[Torrent](#torrent)[]>. Параметр `sort` может принимать одно из следующих значений: [`"registered"`](#registered), [`"title"`](#title), [`"downloads"`](#downloads), [`"size"`](#size), `"lastMessage"`, [`"seeds"`](#seeds) или [`"leeches"`](#leeches).
+### RutrackerApi#search({ query, sort, order })
+Возвращает Promise<[Torrent](#torrent)[]>. Параметр `sort` может принимать одно из следующих значений: [`"registered"`](#registered), [`"title"`](#title), [`"downloads"`](#downloads), [`"size"`](#size), `"lastMessage"`, [`"seeds"`](#seeds) или [`"leeches"`](#leeches). Параметр `order` может принимать значение `desc` или `asc`. Когда указан параметр `order`, `sort` также должен быть указан.
 
 ```js
 const RutrackerApi = require('rutracker-api');
