@@ -27,6 +27,8 @@ describe("#search", () => {
 
     const rutracker = new RutrackerApi();
     const query = "query";
+    const sort = "sort";
+    const order = "order";
 
     const search = jest
       .fn()
@@ -38,11 +40,12 @@ describe("#search", () => {
       .mockImplementationOnce(html => Promise.resolve({ container: html }));
     rutracker.parser.parseSearch = parseSearch;
 
-    expect(rutracker.search({ query })).resolves.toEqual({
+    expect(rutracker.search({ query, sort, order })).resolves.toEqual({
       container: {
         request: {
           query,
-          sort: "registered"
+          sort,
+          order
         }
       }
     });
