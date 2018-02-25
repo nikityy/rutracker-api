@@ -4,7 +4,7 @@ const { range } = require("./lib/utils");
 
 const PER_PAGE = 50;
 const getOffset = index => index * PER_PAGE;
-const getPageIndex = offset => Math.round(offset / PER_PAGE);
+const getPageIndex = offset => Math.ceil(offset / PER_PAGE);
 
 class RutrackerApi {
   constructor() {
