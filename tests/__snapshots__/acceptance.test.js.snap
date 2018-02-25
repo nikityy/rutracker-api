@@ -23,9 +23,9 @@ Array [
     "downloads": 7028,
     "host": "http://rutracker.org",
     "id": "4261022",
-    "leeches": 1,
+    "leeches": 2,
     "registered": 2012-11-24T12:47:14.000Z,
-    "seeds": 16,
+    "seeds": 18,
     "size": 2349328217,
     "state": "проверено",
     "title": "Дневник сельского священника / Journal d'un cure de campagne / Diary of a Country Priest (Робер Брессон / Robert Bresson) [1951, Франция, драма, DVDRip] VO + Sub Rus, eng + Original Fre",
@@ -94,6 +94,224 @@ Array [
     "size": 7315365888,
     "state": "проверено",
     "title": "Дневник сельского священника / Journal d'un cure de campagne / Diary of a Country Priest (Робер Брессон / Robert Bresson) [1951, Франция, драма, DVD9 (custom)] VO + original + sub, R1 Criterion",
+  },
+]
+`;
+
+exports[`#search respects from and limit params 1`] = `
+Array [
+  Object {
+    "id": "5194116",
+  },
+  Object {
+    "id": "5194324",
+  },
+  Object {
+    "id": "5194120",
+  },
+  Object {
+    "id": "5194105",
+  },
+  Object {
+    "id": "5160002",
+  },
+  Object {
+    "id": "5153285",
+  },
+  Object {
+    "id": "5153226",
+  },
+  Object {
+    "id": "5146208",
+  },
+  Object {
+    "id": "5086490",
+  },
+  Object {
+    "id": "5093460",
+  },
+  Object {
+    "id": "5093458",
+  },
+  Object {
+    "id": "5109977",
+  },
+  Object {
+    "id": "5091203",
+  },
+  Object {
+    "id": "5103487",
+  },
+  Object {
+    "id": "5051019",
+  },
+  Object {
+    "id": "5051011",
+  },
+  Object {
+    "id": "5049938",
+  },
+  Object {
+    "id": "5013488",
+  },
+  Object {
+    "id": "4981053",
+  },
+  Object {
+    "id": "4927849",
+  },
+  Object {
+    "id": "4925469",
+  },
+  Object {
+    "id": "4854502",
+  },
+  Object {
+    "id": "4825756",
+  },
+  Object {
+    "id": "4824716",
+  },
+  Object {
+    "id": "4790096",
+  },
+  Object {
+    "id": "4780433",
+  },
+  Object {
+    "id": "4774354",
+  },
+  Object {
+    "id": "4746903",
+  },
+  Object {
+    "id": "4705811",
+  },
+  Object {
+    "id": "4703795",
+  },
+  Object {
+    "id": "4703080",
+  },
+  Object {
+    "id": "4694638",
+  },
+  Object {
+    "id": "4673515",
+  },
+  Object {
+    "id": "4654876",
+  },
+  Object {
+    "id": "4649916",
+  },
+  Object {
+    "id": "4643386",
+  },
+  Object {
+    "id": "4629664",
+  },
+  Object {
+    "id": "4607193",
+  },
+  Object {
+    "id": "4606073",
+  },
+  Object {
+    "id": "4536318",
+  },
+  Object {
+    "id": "4527887",
+  },
+  Object {
+    "id": "4503079",
+  },
+  Object {
+    "id": "4393747",
+  },
+  Object {
+    "id": "4376010",
+  },
+  Object {
+    "id": "4326400",
+  },
+  Object {
+    "id": "4323293",
+  },
+  Object {
+    "id": "4340577",
+  },
+  Object {
+    "id": "4315669",
+  },
+  Object {
+    "id": "4193668",
+  },
+  Object {
+    "id": "4188425",
+  },
+  Object {
+    "id": "4185994",
+  },
+  Object {
+    "id": "4186108",
+  },
+  Object {
+    "id": "4005524",
+  },
+  Object {
+    "id": "3935289",
+  },
+  Object {
+    "id": "3927091",
+  },
+  Object {
+    "id": "3925398",
+  },
+  Object {
+    "id": "3925725",
+  },
+  Object {
+    "id": "3905752",
+  },
+  Object {
+    "id": "3878544",
+  },
+  Object {
+    "id": "3874439",
+  },
+  Object {
+    "id": "3874330",
+  },
+  Object {
+    "id": "3871967",
+  },
+  Object {
+    "id": "3231266",
+  },
+  Object {
+    "id": "3154394",
+  },
+  Object {
+    "id": "2935617",
+  },
+  Object {
+    "id": "2923586",
+  },
+  Object {
+    "id": "2910308",
+  },
+  Object {
+    "id": "1613110",
+  },
+  Object {
+    "id": "1009042",
+  },
+  Object {
+    "id": "362117",
+  },
+  Object {
+    "id": "58233",
   },
 ]
 `;

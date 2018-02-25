@@ -72,6 +72,26 @@ describeFunc("#search", () => {
       });
   });
 
+  test("respects from and limit params", () => {
+    expect.assertions(2);
+
+    const rutracker = new RutrackerApi();
+
+    rutracker.pageProvider.authorized = true;
+    rutracker.pageProvider.cookie = COOKIE;
+
+    return rutracker
+      .search({ query: "revenant", sort: "registered", from: 50, limit: 121 })
+      .then(torrents => {
+        const snapshots = torrents.map(torrent => ({
+          id: torrent.id
+        }));
+
+        expect(snapshots).toHaveLength(71);
+        expect(snapshots).toMatchSnapshot();
+      });
+  });
+
   test("respects order param", () => {
     expect.assertions(1);
 
