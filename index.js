@@ -24,8 +24,7 @@ class RutrackerApi {
       const required = limit === 0 ? count : Math.min(limit, count);
 
       if (loaded >= required) {
-        const end = loaded > required ? required - loaded : torrents.length;
-        return torrents.slice(0, end);
+        return torrents.slice(0, required - from);
       }
 
       const pagesCount = getPageIndex(required - loaded);
@@ -40,7 +39,9 @@ class RutrackerApi {
         })
       );
 
-      return Promise.all(rest).then(chunks => torrents.concat(...chunks));
+      return Promise.all(rest).then(chunks =>
+        torrents.concat(...chunks).slice(0, required - from)
+      );
     });
   }
 

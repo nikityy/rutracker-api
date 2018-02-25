@@ -12,7 +12,7 @@ Array [
     "id": "4386165",
     "leeches": 0,
     "registered": 2013-03-21T14:50:14.000Z,
-    "seeds": 6,
+    "seeds": 8,
     "size": 405442769,
     "state": "проверено",
     "title": "Бернанос Жорж - Дневник сельского священника [Алексей Россошанский, 2013, MP3, 64-192 kbps]",
@@ -25,7 +25,7 @@ Array [
     "id": "4261022",
     "leeches": 2,
     "registered": 2012-11-24T12:47:14.000Z,
-    "seeds": 18,
+    "seeds": 17,
     "size": 2349328217,
     "state": "проверено",
     "title": "Дневник сельского священника / Journal d'un cure de campagne / Diary of a Country Priest (Робер Брессон / Robert Bresson) [1951, Франция, драма, DVDRip] VO + Sub Rus, eng + Original Fre",
@@ -77,7 +77,7 @@ Array [
     "id": "2960032",
     "leeches": 0,
     "registered": 2010-05-15T16:00:28.000Z,
-    "seeds": 6,
+    "seeds": 7,
     "size": 1591973410,
     "state": "проверено",
     "title": "Дневник сельского священника / Journal d'un curé de campagne (Робер Брессон / Robert Bresson) [1951, Франция, Драма, DVDRip-AVC] VO + original + sub",
@@ -306,12 +306,6 @@ Array [
   },
   Object {
     "id": "1009042",
-  },
-  Object {
-    "id": "362117",
-  },
-  Object {
-    "id": "58233",
   },
 ]
 `;

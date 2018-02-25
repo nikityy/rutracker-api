@@ -81,13 +81,13 @@ describeFunc("#search", () => {
     rutracker.pageProvider.cookie = COOKIE;
 
     return rutracker
-      .search({ query: "revenant", sort: "registered", from: 50, limit: 121 })
+      .search({ query: "revenant", sort: "registered", from: 50, limit: 119 })
       .then(torrents => {
         const snapshots = torrents.map(torrent => ({
           id: torrent.id
         }));
 
-        expect(snapshots).toHaveLength(71);
+        expect(snapshots).toHaveLength(69);
         expect(snapshots).toMatchSnapshot();
       });
   });
@@ -113,6 +113,21 @@ describeFunc("#search", () => {
         }));
 
         expect(snapshots).toMatchSnapshot();
+      });
+  });
+
+  test("fetches all if limit is set to 0", () => {
+    expect.assertions(1);
+
+    const rutracker = new RutrackerApi();
+
+    rutracker.pageProvider.authorized = true;
+    rutracker.pageProvider.cookie = COOKIE;
+
+    return rutracker
+      .search({ query: "revenant", sort: "registered", limit: 0 })
+      .then(torrents => {
+        expect(torrents).toHaveLength(121);
       });
   });
 });
