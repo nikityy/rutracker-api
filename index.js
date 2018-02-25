@@ -21,7 +21,7 @@ class RutrackerApi {
       const count = this.parser.parseCount(html);
       const torrents = this.parser.parseSearch(html);
       const loaded = torrents.length + from;
-      const required = Math.min(limit, count);
+      const required = limit === 0 ? count : Math.min(limit, count);
 
       if (loaded >= required) {
         const end = loaded > required ? required - loaded : torrents.length;

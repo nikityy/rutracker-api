@@ -122,6 +122,34 @@ describe("#search", () => {
       rutracker.search({ query, sort, order, limit: 44 })
     ).resolves.toEqual(range(44));
   });
+
+  test("request all if limit is set to 0", () => {
+    expect.assertions(1);
+
+    const rutracker = new RutrackerApi();
+    const query = "query";
+    const sort = "sort";
+    const order = "order";
+
+    const search = jest
+      .fn()
+      .mockImplementation(request =>
+        Promise.resolve({ from: request.from, limit: request.limit })
+      );
+    rutracker.pageProvider.search = search;
+
+    const parseSearch = jest
+      .fn()
+      .mockImplementation(({ from }) => range(50).map(index => from + index));
+    rutracker.parser.parseSearch = parseSearch;
+
+    const parseCount = jest.fn().mockImplementation(() => 500);
+    rutracker.parser.parseCount = parseCount;
+
+    return expect(
+      rutracker.search({ query, sort, order, limit: 0 })
+    ).resolves.toEqual(range(500));
+  });
 });
 
 describe("#download", () => {
