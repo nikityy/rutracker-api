@@ -89,7 +89,7 @@ describe("#login", () => {
 
 describe("#search", () => {
   test("making correct request", () => {
-    expect.assertions(4);
+    expect.assertions(5);
 
     const pageProvider = new PageProvider();
     const request = jest.fn().mockReturnValue(Promise.resolve({ status: 200 }));
@@ -116,6 +116,11 @@ describe("#search", () => {
 
     pageProvider.search({ query, sort: "size", order: "asc" });
     expect(request.mock.calls[2][0].data).toEqual("o=7&s=1");
+
+    pageProvider.search({ query, from: 150 });
+    expect(request.mock.calls[3][0].url).toEqual(
+      `http://rutracker.org/forum/tracker.php?nm=${query}&start=150`
+    );
   });
 
   test("rejects if called with unknown sorting", () => {
