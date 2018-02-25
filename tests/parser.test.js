@@ -102,6 +102,18 @@ describe("#parseSearch", () => {
   });
 });
 
+describe("#parseCount", () => {
+  test("returns total amount of objects", () => {
+    expect.assertions(1);
+
+    const resultsHtml = utils.readMockPage("search_results_page");
+    const parser = new Parser();
+    const count = parser.parseCount(resultsHtml);
+
+    expect(count).toEqual(31);
+  });
+});
+
 describe("#parseMagnetLink", () => {
   test("returns magnet link", () => {
     expect.assertions(1);
