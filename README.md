@@ -118,7 +118,7 @@ const approvedTorrents = torrents.filter(torrent => torrent.state === Torrent.AP
 Константа для статуса `временная`.
 
 ## Разработка
-Тесты запускаются стандартной командой `npm test`. По умолчанию будет запущен ESLint, а также все unit-тесты. Чтобы также запускать acceptance-тесты, необходимо положить файл `acceptance.config.js` в директорию `tests` с примерно таким содержанием:
+Тесты запускаются стандартной командой `npm test`. По умолчанию будут запущены ESLint и все unit-тесты. Чтобы также запускать acceptance-тесты, необходимо положить файл `acceptance.config.js` в директорию `tests` с примерно таким содержанием:
 
 ```js
 module.exports = {
