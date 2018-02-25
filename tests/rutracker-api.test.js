@@ -1,4 +1,5 @@
 const RutrackerApi = require("../index");
+const { range } = require("../lib/utils");
 
 describe("#login", () => {
   test("resolves with true", () => {
@@ -23,7 +24,7 @@ describe("#login", () => {
 
 describe("#search", () => {
   test("resolves with parsed torrents", () => {
-    expect.assertions(1);
+    expect.assertions(3);
 
     const rutracker = new RutrackerApi();
     const query = "query";
@@ -35,20 +36,91 @@ describe("#search", () => {
       .mockImplementationOnce(q => Promise.resolve({ request: q }));
     rutracker.pageProvider.search = search;
 
-    const parseSearch = jest
-      .fn()
-      .mockImplementationOnce(html => Promise.resolve({ container: html }));
+    const parseSearch = jest.fn().mockImplementationOnce(() => range(50));
     rutracker.parser.parseSearch = parseSearch;
 
-    expect(rutracker.search({ query, sort, order })).resolves.toEqual({
-      container: {
-        request: {
-          query,
-          sort,
-          order
-        }
-      }
+    const parseCount = jest.fn().mockImplementation(() => 50);
+    rutracker.parser.parseCount = parseCount;
+
+    return rutracker.search({ query, sort, order }).then(torrents => {
+      expect(parseSearch).toHaveBeenCalledTimes(1);
+      expect(parseSearch).toHaveBeenCalledWith({
+        request: { from: 0, query, sort, order }
+      });
+      expect(torrents).toEqual(range(50));
     });
+  });
+
+  test("concatenates multiple requests", () => {
+    expect.assertions(4);
+
+    const rutracker = new RutrackerApi();
+    const query = "query";
+    const sort = "sort";
+    const order = "order";
+
+    const search = jest
+      .fn()
+      .mockImplementation(request =>
+        Promise.resolve({ from: request.from, limit: request.limit })
+      );
+    rutracker.pageProvider.search = search;
+
+    const parseSearch = jest.fn().mockImplementation(({ from }) =>
+      new Array(50).fill(null).map((_, index) => ({
+        id: from + index
+      }))
+    );
+    rutracker.parser.parseSearch = parseSearch;
+
+    const parseCount = jest.fn().mockImplementation(() => 500);
+    rutracker.parser.parseCount = parseCount;
+
+    return rutracker
+      .search({ query, sort, order, limit: 400 })
+      .then(torrents => {
+        expect(search).toHaveBeenCalledTimes(8);
+        expect(search.mock.calls).toEqual([
+          [{ from: 0, query, sort, order }],
+          [{ from: 50, query, sort, order }],
+          [{ from: 100, query, sort, order }],
+          [{ from: 150, query, sort, order }],
+          [{ from: 200, query, sort, order }],
+          [{ from: 250, query, sort, order }],
+          [{ from: 300, query, sort, order }],
+          [{ from: 350, query, sort, order }]
+        ]);
+        expect(torrents).toHaveLength(400);
+        expect(torrents.map(x => x.id)).toEqual(range(400));
+      });
+  });
+
+  test("trims if got more than set in limit", () => {
+    expect.assertions(1);
+
+    const rutracker = new RutrackerApi();
+    const query = "query";
+    const sort = "sort";
+    const order = "order";
+
+    const search = jest
+      .fn()
+      .mockImplementation(request =>
+        Promise.resolve({ from: request.from, limit: request.limit })
+      );
+    rutracker.pageProvider.search = search;
+
+    const parseSearch = jest
+      .fn()
+      .mockImplementation(({ from }) => range(50).map(index => from + index));
+    rutracker.parser.parseSearch = parseSearch;
+
+    const parseCount = jest.fn().mockImplementation(() => 500);
+    rutracker.parser.parseCount = parseCount;
+
+    return expect(
+      rutracker.search({ query, sort, order, limit: 44 })
+    ).resolves.toEqual(range(44));
   });
 });
 
