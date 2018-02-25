@@ -42,5 +42,8 @@
       "name": "nikityy",
       "email": "nickgusarov@gmail.com"
     }
-  ]
+  ],
+  "jest": {
+    "testEnvironment": "node"
+  }
 }
