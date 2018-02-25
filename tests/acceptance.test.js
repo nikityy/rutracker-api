@@ -51,6 +51,50 @@ describeFunc("#search", () => {
       rutracker.search({ query: "дневник сельского священника" })
     ).resolves.toMatchSnapshot();
   });
+
+  test("respects sort param", () => {
+    expect.assertions(1);
+
+    const rutracker = new RutrackerApi();
+
+    rutracker.pageProvider.authorized = true;
+    rutracker.pageProvider.cookie = COOKIE;
+
+    return rutracker
+      .search({ query: "дневник сельского священника", sort: "size" })
+      .then(torrents => {
+        const snapshots = torrents.map(torrent => ({
+          id: torrent.id,
+          size: torrent.size
+        }));
+
+        expect(snapshots).toMatchSnapshot();
+      });
+  });
+
+  test("respects order param", () => {
+    expect.assertions(1);
+
+    const rutracker = new RutrackerApi();
+
+    rutracker.pageProvider.authorized = true;
+    rutracker.pageProvider.cookie = COOKIE;
+
+    return rutracker
+      .search({
+        query: "дневник сельского священника",
+        sort: "size",
+        order: "asc"
+      })
+      .then(torrents => {
+        const snapshots = torrents.map(torrent => ({
+          id: torrent.id,
+          size: torrent.size
+        }));
+
+        expect(snapshots).toMatchSnapshot();
+      });
+  });
 });
 
 describeFunc("#download", () => {

@@ -1,4 +1,4 @@
-# rutracker-api [![Build Status](https://travis-ci.org/nikityy/Rutracker-API.svg?branch=master)](https://travis-ci.org/nikityy/Rutracker-API)
+# rutracker-api [![Build Status](https://travis-ci.org/nikityy/rutracker-api.svg?branch=master)](https://travis-ci.org/nikityy/rutracker-api)
 Позволяет искать по раздачам трекера Rutracker.org. Поскольку поиск запрещён для незарегистрированных пользователей, также поддерживаетcя и авторизация.
 
 ## Установка
@@ -20,15 +20,15 @@ rutracker.login({ username: '', password: '' })
   .catch(err => console.error(err));
 ```
 
-### RutrackerApi#search({ query })
-Возвращает Promise<[Torrent](#torrent)[]>.
+### RutrackerApi#search({ query, sort, order })
+Возвращает Promise<[Torrent](#torrent)[]>. Параметр `sort` может принимать одно из следующих значений: [`"registered"`](#registered), [`"title"`](#title), [`"downloads"`](#downloads), [`"size"`](#size), `"lastMessage"`, [`"seeds"`](#seeds) или [`"leeches"`](#leeches). Параметр `order` может принимать значение `desc` или `asc`. Когда указан параметр `order`, `sort` также должен быть указан.
 
 ```js
 const RutrackerApi = require('rutracker-api');
 const rutracker = new RutrackerApi();
 
 rutracker.login({ username: '', password: '' })
-  .then(() => rutracker.search({ query: 'your query' }))
+  .then(() => rutracker.search({ query: 'your query', sort: 'size' }))
   .then(torrents => console.log(torrents));
 ```
 
@@ -96,6 +96,12 @@ rutracker.login({ username: '', password: '' })
 ```js
 const approvedTorrents = torrents.filter(torrent => torrent.state === Torrent.APPROVED);
 ```
+
+##### downloads
+Тип: `number`. Количество скачиваний торрент-файла.
+
+##### registered
+Тип: `Date`. Дата, когда торрент был зарегистрирован.
 
 #### Статические свойства
 

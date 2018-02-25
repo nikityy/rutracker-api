@@ -1,4 +1,5 @@
 const PageProvider = require("../lib/page-provider");
+const { NotAuthorizedError, ValidationError } = require("../lib/errors");
 
 describe("#login", () => {
   test("making correct request", () => {
@@ -88,14 +89,13 @@ describe("#login", () => {
 
 describe("#search", () => {
   test("making correct request", () => {
-    expect.assertions(2);
+    expect.assertions(4);
 
     const pageProvider = new PageProvider();
-    const request = jest.fn();
+    const request = jest.fn().mockReturnValue(Promise.resolve({ status: 200 }));
     const cookie = "cookie";
     const query = "query";
 
-    request.mockReturnValue(Promise.resolve({ status: 200 }));
     pageProvider.authorized = true;
     pageProvider.cookie = cookie;
     pageProvider.request = request;
@@ -104,11 +104,58 @@ describe("#search", () => {
 
     expect(request).toHaveBeenCalledTimes(1);
     expect(request).toHaveBeenCalledWith({
+      data: "",
       headers: { Cookie: cookie },
       method: "POST",
       responseType: "arraybuffer",
       url: `http://rutracker.org/forum/tracker.php?nm=${query}`
     });
+
+    pageProvider.search({ query, sort: "size" });
+    expect(request.mock.calls[1][0].data).toEqual("o=7");
+
+    pageProvider.search({ query, sort: "size", order: "asc" });
+    expect(request.mock.calls[2][0].data).toEqual("o=7&s=1");
+  });
+
+  test("rejects if called with unknown sorting", () => {
+    expect.assertions(1);
+
+    const pageProvider = new PageProvider();
+    pageProvider.authorized = true;
+
+    const unknownSortField = "123321";
+
+    expect(
+      pageProvider.search({ query: "query", sort: unknownSortField })
+    ).rejects.toThrowError(ValidationError);
+  });
+
+  test("rejects if called with unknown order", () => {
+    expect.assertions(1);
+
+    const pageProvider = new PageProvider();
+    pageProvider.authorized = true;
+
+    const sort = "size";
+    const order = "123321";
+
+    expect(
+      pageProvider.search({ query: "query", sort, order })
+    ).rejects.toThrowError(ValidationError);
+  });
+
+  test("rejects if called with order but without sort", () => {
+    expect.assertions(1);
+
+    const pageProvider = new PageProvider();
+    pageProvider.authorized = true;
+
+    const order = "desc";
+
+    expect(pageProvider.search({ query: "query", order })).rejects.toThrowError(
+      ValidationError
+    );
   });
 
   test("rejects if called when not authorized", () => {
@@ -116,7 +163,9 @@ describe("#search", () => {
 
     const pageProvider = new PageProvider();
 
-    expect(pageProvider.search({ query: "query" })).rejects.toThrowError();
+    expect(pageProvider.search({ query: "query" })).rejects.toThrowError(
+      NotAuthorizedError
+    );
   });
 });
 

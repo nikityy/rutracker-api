@@ -72,6 +72,20 @@ describe("#parseSearch", () => {
     expect(results[30].size).toEqual(682311748);
   });
 
+  test("parses downloads", () => {
+    expect.assertions(2);
+
+    expect(results[0].downloads).toEqual(84);
+    expect(results[30].downloads).toEqual(7343);
+  });
+
+  test("parses registered", () => {
+    expect.assertions(2);
+
+    expect(results[0].registered.valueOf()).toEqual(1517675865000);
+    expect(results[30].registered.valueOf()).toEqual(1162503752000);
+  });
+
   test("returns array of search results", () => {
     expect.assertions(1);
 
