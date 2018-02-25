@@ -7,7 +7,7 @@ let COOKIE;
 let describeFunc = describe;
 
 try {
-  const config = require("./acceptance.config"); // eslint-disable-line global-require
+  const config = require("./acceptance.config"); // eslint-disable-line global-require, import/no-unresolved
 
   USERNAME = config.username;
   PASSWORD = config.password;
