@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`#download resolves with torrent file ReadStream 1`] = `"d8:announce22:http://bt.t-ru.org/ann13:announce-listll22:http://bt.t-ru.org/annel31:http://retracker.local/announceee7:comment49:http://rutracker.org/forum/viewtopic.php?t=61605810:created by13:uTorrent/161013:creation datei1200744880e8:encoding5:UTF-84:infod5:filesld6:lengthi1265e4:pathl10:readme.txteed6:lengthi179712e4:pathl12:utorrent.exeeee4:name29:uTorrent 1.6.1 with DHT patch12:piece lengthi65536e6:pieces60:��-\\\\ئ��C��ښ�Zm\`��2g�(q\\\\�F�a�d����� ո��֪p�T��s]�[J>he9:publisher13:rutracker.org13:publisher-url49:http://rutracker.org/forum/viewtopic.php?t=616058e"`;
+
+exports[`#search resolves with search results 1`] = `
+Array [
+  Torrent {
+    "author": "sendoka",
+    "category": "[Аудио] Зарубежная литература",
+    "host": "http://rutracker.org",
+    "id": "4386165",
+    "leeches": 1,
+    "seeds": 5,
+    "size": 405442769,
+    "state": "проверено",
+    "title": "Бернанос Жорж - Дневник сельского священника [Алексей Россошанский, 2013, MP3, 64-192 kbps]",
+  },
+  Torrent {
+    "author": "tеko",
+    "category": "Арт-хаус и авторское кино",
+    "host": "http://rutracker.org",
+    "id": "4261022",
+    "leeches": 0,
+    "seeds": 15,
+    "size": 2349328217,
+    "state": "проверено",
+    "title": "Дневник сельского священника / Journal d'un cure de campagne / Diary of a Country Priest (Робер Брессон / Robert Bresson) [1951, Франция, драма, DVDRip] VO + Sub Rus, eng + Original Fre",
+  },
+  Torrent {
+    "author": "bm11",
+    "category": "Арт-хаус и авторское кино",
+    "host": "http://rutracker.org",
+    "id": "3458910",
+    "leeches": 1,
+    "seeds": 4,
+    "size": 1565820928,
+    "state": "проверено",
+    "title": "Дневник сельского священника / Diary of a Country Priest (Робер Брессон / Robert Bresson) [1951, Франция, драма, DVDRip] VO",
+  },
+  Torrent {
+    "author": "bm11",
+    "category": "Арт-хаус и авторское кино",
+    "host": "http://rutracker.org",
+    "id": "3460051",
+    "leeches": 0,
+    "seeds": 1,
+    "size": 781086720,
+    "state": "проверено",
+    "title": "Дневник сельского священника / Diary of a Country Priest (Робер Брессон / Robert Bresson) [1951, Франция, драма, DVDRip] VO",
+  },
+  Torrent {
+    "author": "Ariobarzan",
+    "category": "Арт-хаус и авторское кино",
+    "host": "http://rutracker.org",
+    "id": "3318320",
+    "leeches": 0,
+    "seeds": 3,
+    "size": 733567810,
+    "state": "проверено",
+    "title": "Дневник сельского священника / Journal d’un cur&#233; de campagne / Diary of a Country Priest (Робер Брессон / Robert Bresson) [1951, Франция, Драма, DVDRip-AVC] Original + Sub (Rus, Eng)",
+  },
+  Torrent {
+    "author": "anf1980",
+    "category": "Арт-хаус и авторское кино",
+    "host": "http://rutracker.org",
+    "id": "2960032",
+    "leeches": 0,
+    "seeds": 5,
+    "size": 1591973410,
+    "state": "проверено",
+    "title": "Дневник сельского священника / Journal d'un cur&#233; de campagne (Робер Брессон / Robert Bresson) [1951, Франция, Драма, DVDRip-AVC] VO + original + sub",
+  },
+  Torrent {
+    "author": "Jinnkeit",
+    "category": "Арт-хаус и авторское кино (DVD)",
+    "host": "http://rutracker.org",
+    "id": "958405",
+    "leeches": 0,
+    "seeds": 5,
+    "size": 7315365888,
+    "state": "проверено",
+    "title": "Дневник сельского священника / Journal d'un cure de campagne / Diary of a Country Priest (Робер Брессон / Robert Bresson) [1951, Франция, драма, DVD9 (custom)] VO + original + sub, R1 Criterion",
+  },
+]
+`;
