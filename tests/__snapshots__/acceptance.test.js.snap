@@ -97,3 +97,69 @@ Array [
   },
 ]
 `;
+
+exports[`#search respects order param 1`] = `
+Array [
+  Object {
+    "id": "4386165",
+    "size": 405442769,
+  },
+  Object {
+    "id": "3318320",
+    "size": 733567810,
+  },
+  Object {
+    "id": "3460051",
+    "size": 781086720,
+  },
+  Object {
+    "id": "3458910",
+    "size": 1565820928,
+  },
+  Object {
+    "id": "2960032",
+    "size": 1591973410,
+  },
+  Object {
+    "id": "4261022",
+    "size": 2349328217,
+  },
+  Object {
+    "id": "958405",
+    "size": 7315365888,
+  },
+]
+`;
+
+exports[`#search respects sort param 1`] = `
+Array [
+  Object {
+    "id": "958405",
+    "size": 7315365888,
+  },
+  Object {
+    "id": "4261022",
+    "size": 2349328217,
+  },
+  Object {
+    "id": "2960032",
+    "size": 1591973410,
+  },
+  Object {
+    "id": "3458910",
+    "size": 1565820928,
+  },
+  Object {
+    "id": "3460051",
+    "size": 781086720,
+  },
+  Object {
+    "id": "3318320",
+    "size": 733567810,
+  },
+  Object {
+    "id": "4386165",
+    "size": 405442769,
+  },
+]
+`;
