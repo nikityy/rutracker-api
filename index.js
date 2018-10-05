@@ -1,8 +1,13 @@
 const Parser = require("./lib/parser");
 const PageProvider = require("./lib/page-provider");
 
+const defaultConfig = {
+  host: "http://rutracker.org",
+  proxy: null
+};
+
 class RutrackerApi {
-  constructor(host = "http://rutracker.org", proxy) {
+  constructor({ host, proxy } = defaultConfig) {
     this.parser = new Parser();
     this.pageProvider = new PageProvider(host, proxy);
   }
