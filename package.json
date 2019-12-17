@@ -1,6 +1,6 @@
 {
   "name": "rutracker-api",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Provides login and search API for Rutracker.org.",
   "main": "index.js",
   "scripts": {
