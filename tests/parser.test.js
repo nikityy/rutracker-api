@@ -10,19 +10,19 @@ describe("#parseSearch", () => {
   test("provides host", () => {
     expect.assertions(1);
 
-    expect(results[30].host).toEqual("http://rutracker.org");
+    expect(results[33].host).toEqual("http://rutracker.org");
   });
 
   test("parses id", () => {
     expect.assertions(1);
 
-    expect(results[30].id).toEqual("88068");
+    expect(results[33].id).toEqual("88068");
   });
 
   test("parses title", () => {
     expect.assertions(1);
 
-    expect(results[30].title).toEqual(
+    expect(results[33].title).toEqual(
       "[DTSCD][DVDA] Metallica - Black Album - 2005"
     );
   });
@@ -30,33 +30,33 @@ describe("#parseSearch", () => {
   test("parses category", () => {
     expect.assertions(1);
 
-    expect(results[30].category).toEqual("Рок-музыка (многоканальная музыка)");
+    expect(results[33].category).toEqual("Рок-музыка (многоканальная музыка)");
   });
 
   test("parses author", () => {
     expect.assertions(1);
 
-    expect(results[30].author).toEqual("Меля");
+    expect(results[33].author).toEqual("Меля");
   });
 
   test("parses author", () => {
     expect.assertions(1);
 
-    expect(results[30].author).toEqual("Меля");
+    expect(results[33].author).toEqual("Меля");
   });
 
   test("parses seeds", () => {
     expect.assertions(2);
 
-    expect(results[0].seeds).toEqual(2);
-    expect(results[30].seeds).toEqual(1);
+    expect(results[0].seeds).toEqual(3);
+    expect(results[33].seeds).toEqual(4);
   });
 
   test("parses leeches", () => {
     expect.assertions(2);
 
-    expect(results[0].leeches).toEqual(0);
-    expect(results[30].leeches).toEqual(1);
+    expect(results[1].leeches).toEqual(3);
+    expect(results[33].leeches).toEqual(0);
   });
 
   test("parses state", () => {
@@ -68,28 +68,28 @@ describe("#parseSearch", () => {
   test("parses size", () => {
     expect.assertions(2);
 
-    expect(results[0].size).toEqual(3028992302);
-    expect(results[30].size).toEqual(682311748);
+    expect(results[0].size).toEqual(4521490797);
+    expect(results[33].size).toEqual(682311748);
   });
 
   test("parses downloads", () => {
     expect.assertions(2);
 
-    expect(results[0].downloads).toEqual(84);
-    expect(results[30].downloads).toEqual(7343);
+    expect(results[0].downloads).toEqual(378);
+    expect(results[33].downloads).toEqual(7721);
   });
 
   test("parses registered", () => {
     expect.assertions(2);
 
-    expect(results[0].registered.valueOf()).toEqual(1517675865000);
-    expect(results[30].registered.valueOf()).toEqual(1162503752000);
+    expect(results[0].registered.valueOf()).toEqual(1564987468000);
+    expect(results[33].registered.valueOf()).toEqual(1162503752000);
   });
 
   test("returns array of search results", () => {
     expect.assertions(1);
 
-    expect(results).toHaveLength(31);
+    expect(results).toHaveLength(34);
   });
 
   test("returns empty array if no results", () => {
