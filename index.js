@@ -14,7 +14,7 @@ class RutrackerApi {
   search({ query, sort, order }) {
     return this.pageProvider
       .search({ query, sort, order })
-      .then(html => this.parser.parseSearch(html));
+      .then((html) => this.parser.parseSearch(html));
   }
 
   download(id) {
@@ -24,7 +24,7 @@ class RutrackerApi {
   getMagnetLink(id) {
     return this.pageProvider
       .thread(id)
-      .then(html => this.parser.parseMagnetLink(html));
+      .then((html) => this.parser.parseMagnetLink(html));
   }
 }
 
