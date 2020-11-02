@@ -1,4 +1,4 @@
-const RutrackerApi = require("../");
+const RutrackerApi = require("..");
 const { AuthorizationError } = require("../lib/errors");
 
 let USERNAME;
@@ -62,10 +62,10 @@ describeFunc("#search", () => {
 
     return rutracker
       .search({ query: "дневник сельского священника", sort: "size" })
-      .then(torrents => {
-        const snapshots = torrents.map(torrent => ({
+      .then((torrents) => {
+        const snapshots = torrents.map((torrent) => ({
           id: torrent.id,
-          size: torrent.size
+          size: torrent.size,
         }));
 
         expect(snapshots).toMatchSnapshot();
@@ -84,12 +84,12 @@ describeFunc("#search", () => {
       .search({
         query: "дневник сельского священника",
         sort: "size",
-        order: "asc"
+        order: "asc",
       })
-      .then(torrents => {
-        const snapshots = torrents.map(torrent => ({
+      .then((torrents) => {
+        const snapshots = torrents.map((torrent) => ({
           id: torrent.id,
-          size: torrent.size
+          size: torrent.size,
         }));
 
         expect(snapshots).toMatchSnapshot();
@@ -98,7 +98,7 @@ describeFunc("#search", () => {
 });
 
 describeFunc("#download", () => {
-  test("resolves with torrent file ReadStream", done => {
+  test("resolves with torrent file ReadStream", (done) => {
     expect.assertions(1);
 
     const rutracker = new RutrackerApi();
@@ -106,10 +106,10 @@ describeFunc("#download", () => {
     rutracker.pageProvider.authorized = true;
     rutracker.pageProvider.cookie = COOKIE;
 
-    rutracker.download("616058").then(stream => {
+    rutracker.download("616058").then((stream) => {
       let file = "";
 
-      stream.on("data", data => {
+      stream.on("data", (data) => {
         file += data.toString();
       });
 

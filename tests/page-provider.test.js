@@ -21,7 +21,7 @@ describe("#login", () => {
       maxRedirects: 0,
       method: "POST",
       url: "http://rutracker.org/forum/login.php",
-      validateStatus: request.mock.calls[0][0].validateStatus
+      validateStatus: request.mock.calls[0][0].validateStatus,
     });
   });
 
@@ -33,9 +33,9 @@ describe("#login", () => {
       Promise.resolve({
         headers: {
           "set-cookie": [
-            "bb_session=XXX; expires=Tue, 15-Feb-2028 10:09:15 GMT; Max-Age=315360000; path=/forum/; domain=.rutracker.org; HttpOnly"
-          ]
-        }
+            "bb_session=XXX; expires=Tue, 15-Feb-2028 10:09:15 GMT; Max-Age=315360000; path=/forum/; domain=.rutracker.org; HttpOnly",
+          ],
+        },
       })
     );
     const username = "aaa";
@@ -61,8 +61,8 @@ describe("#login", () => {
       Promise.resolve({
         status: 302,
         headers: {
-          "set-cookie": "COOKIE"
-        }
+          "set-cookie": "COOKIE",
+        },
       })
     );
     pageProvider.request = request;
@@ -108,7 +108,7 @@ describe("#search", () => {
       headers: { Cookie: cookie },
       method: "POST",
       responseType: "arraybuffer",
-      url: `http://rutracker.org/forum/tracker.php?nm=${query}`
+      url: `http://rutracker.org/forum/tracker.php?nm=${query}`,
     });
 
     pageProvider.search({ query, sort: "size" });
@@ -190,7 +190,7 @@ describe("#thread", () => {
       headers: { Cookie: cookie },
       method: "GET",
       responseType: "arraybuffer",
-      url: `http://rutracker.org/forum/viewtopic.php?t=${id}`
+      url: `http://rutracker.org/forum/viewtopic.php?t=${id}`,
     });
   });
 
@@ -224,7 +224,7 @@ describe("#torrentFile", () => {
       headers: { Cookie: cookie },
       method: "GET",
       responseType: "stream",
-      url: `http://rutracker.org/forum/dl.php?t=${id}`
+      url: `http://rutracker.org/forum/dl.php?t=${id}`,
     });
   });
 

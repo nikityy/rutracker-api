@@ -32,12 +32,12 @@ describe("#search", () => {
 
     const search = jest
       .fn()
-      .mockImplementationOnce(q => Promise.resolve({ request: q }));
+      .mockImplementationOnce((q) => Promise.resolve({ request: q }));
     rutracker.pageProvider.search = search;
 
     const parseSearch = jest
       .fn()
-      .mockImplementationOnce(html => Promise.resolve({ container: html }));
+      .mockImplementationOnce((html) => Promise.resolve({ container: html }));
     rutracker.parser.parseSearch = parseSearch;
 
     expect(rutracker.search({ query, sort, order })).resolves.toEqual({
@@ -45,9 +45,9 @@ describe("#search", () => {
         request: {
           query,
           sort,
-          order
-        }
-      }
+          order,
+        },
+      },
     });
   });
 });
@@ -61,11 +61,11 @@ describe("#download", () => {
 
     const torrentFile = jest
       .fn()
-      .mockImplementationOnce(i => Promise.resolve({ id: i }));
+      .mockImplementationOnce((i) => Promise.resolve({ id: i }));
     rutracker.pageProvider.torrentFile = torrentFile;
 
     expect(rutracker.download(id)).resolves.toEqual({
-      id
+      id,
     });
   });
 });
@@ -79,18 +79,18 @@ describe("#getMagnetLink", () => {
 
     const thread = jest
       .fn()
-      .mockImplementationOnce(i => Promise.resolve({ id: i }));
+      .mockImplementationOnce((i) => Promise.resolve({ id: i }));
     rutracker.pageProvider.thread = thread;
 
     const parseMagnetLink = jest
       .fn()
-      .mockImplementationOnce(html => Promise.resolve({ container: html }));
+      .mockImplementationOnce((html) => Promise.resolve({ container: html }));
     rutracker.parser.parseMagnetLink = parseMagnetLink;
 
     expect(rutracker.getMagnetLink(id)).resolves.toEqual({
       container: {
-        id
-      }
+        id,
+      },
     });
   });
 });

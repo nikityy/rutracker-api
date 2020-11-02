@@ -1,29 +1,25 @@
 module.exports = {
   root: true,
   parserOptions: {
-    ecmaVersion: 2017,
-    sourceType: 'module'
+    ecmaVersion: 2020,
+    sourceType: "module",
   },
-  extends: [
-    'airbnb-base',
-    'prettier',
-  ],
-  plugins: [
-    'prettier',
-  ],
+  extends: ["airbnb-base", "prettier"],
+  plugins: ["prettier"],
   rules: {
-    'prettier/prettier': 'error',
-    'class-methods-use-this': 'off',
+    "prettier/prettier": "error",
+    "class-methods-use-this": "off",
+    "max-classes-per-file": "off",
   },
   env: {
-    node: true
+    node: true,
   },
   overrides: [
     {
-      files: ['tests/**/*.test.js'],
+      files: ["tests/**/*.test.js"],
       env: {
         jest: true,
-      }
-    }
-  ]
+      },
+    },
+  ],
 };
