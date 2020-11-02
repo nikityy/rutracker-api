@@ -1,10 +1,12 @@
 const Parser = require("./lib/parser");
 const PageProvider = require("./lib/page-provider");
+const AxiosSingleton = require("./lib/axios");
 
 class RutrackerApi {
-  constructor() {
-    this.parser = new Parser();
-    this.pageProvider = new PageProvider();
+  constructor({ mirror, proxy, userAgent, timeout }) {
+    this.axios = new AxiosSingleton({ mirror, proxy, userAgent, timeout });
+    this.pageProvider = new PageProvider(this.axios);
+    this.parser = new Parser(mirror);
   }
 
   login({ username, password }) {
