@@ -1,6 +1,6 @@
 {
-  "name": "rutracker-api",
-  "version": "1.1.2",
+  "name": "rutracker-api-with-proxy",
+  "version": "2.0.0",
   "description": "Provides login and search API for Rutracker.org.",
   "main": "index.js",
   "scripts": {
@@ -14,33 +14,43 @@
   "author": {
     "name": "Nikita Gusarov"
   },
+  "contributors": [
+    {
+      "name": "Kirill Fertikov"
+    }
+  ],
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.19.0",
-    "cheerio": "^1.0.0-rc.2",
-    "windows-1251": "^1.0.0"
+    "axios": "^1.2.3",
+    "cheerio": "^1.0.0-rc.12",
+    "windows-1251": "^1.1.0",
+    "socks-proxy-agent": "^7.0.0"
   },
   "devDependencies": {
-    "eslint": "^4.18.0",
-    "eslint-config-airbnb-base": "^12.1.0",
-    "eslint-config-prettier": "^2.9.0",
-    "eslint-plugin-import": "^2.8.0",
-    "eslint-plugin-prettier": "^2.6.0",
-    "jest": "^22.3.0",
-    "prettier": "^1.10.2"
+    "eslint": "^8.32.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-prettier": "^4.2.1",
+    "jest": "^29.3.1",
+    "prettier": "^2.8.3"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nikityy/rutracker-api.git"
+    "url": "git+https://github.com/fertkir/rutracker-api.git"
   },
   "bugs": {
-    "url": "https://github.com/nikityy/rutracker-api/issues"
+    "url": "https://github.com/fertkir/rutracker-api/issues"
   },
-  "homepage": "https://github.com/nikityy/rutracker-api#readme",
+  "homepage": "https://github.com/fertkir/rutracker-api#readme",
   "maintainers": [
     {
       "name": "nikityy",
       "email": "nickgusarov@gmail.com"
+    },
+    {
+      "name": "Kirill Fertikov",
+      "email": "kirill.fertikov@gmail.com"
     }
   ],
   "jest": {

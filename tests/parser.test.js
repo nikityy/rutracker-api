@@ -10,7 +10,7 @@ describe("#parseSearch", () => {
   test("provides host", () => {
     expect.assertions(1);
 
-    expect(results[33].host).toEqual("http://rutracker.org");
+    expect(results[33].host).toEqual("https://rutracker.org");
   });
 
   test("parses id", () => {

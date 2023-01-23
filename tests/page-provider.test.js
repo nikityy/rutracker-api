@@ -10,7 +10,13 @@ describe("#login", () => {
     const username = "aaa";
     const password = "bbb";
 
-    request.mockReturnValue(Promise.reject());
+    request.mockReturnValue(
+      Promise.resolve({
+        headers: {
+          "set-cookie": ["COOKIE"],
+        },
+      })
+    );
     pageProvider.request = request;
 
     pageProvider.login(username, password);
@@ -20,8 +26,8 @@ describe("#login", () => {
       data: `login_username=${username}&login_password=${password}&login=%D0%92%D1%85%D0%BE%D0%B4`,
       maxRedirects: 0,
       method: "POST",
-      url: "http://rutracker.org/forum/login.php",
-      validateStatus: request.mock.calls[0][0].validateStatus
+      url: "https://rutracker.org/forum/login.php",
+      validateStatus: request.mock.calls[0][0].validateStatus,
     });
   });
 
@@ -33,9 +39,9 @@ describe("#login", () => {
       Promise.resolve({
         headers: {
           "set-cookie": [
-            "bb_session=XXX; expires=Tue, 15-Feb-2028 10:09:15 GMT; Max-Age=315360000; path=/forum/; domain=.rutracker.org; HttpOnly"
-          ]
-        }
+            "bb_session=XXX; expires=Tue, 15-Feb-2028 10:09:15 GMT; Max-Age=315360000; path=/forum/; domain=.rutracker.org; HttpOnly",
+          ],
+        },
       })
     );
     const username = "aaa";
@@ -61,8 +67,8 @@ describe("#login", () => {
       Promise.resolve({
         status: 302,
         headers: {
-          "set-cookie": "COOKIE"
-        }
+          "set-cookie": "COOKIE",
+        },
       })
     );
     pageProvider.request = request;
@@ -108,7 +114,7 @@ describe("#search", () => {
       headers: { Cookie: cookie },
       method: "POST",
       responseType: "arraybuffer",
-      url: `http://rutracker.org/forum/tracker.php?nm=${query}`
+      url: `https://rutracker.org/forum/tracker.php?nm=${query}`,
     });
 
     pageProvider.search({ query, sort: "size" });
@@ -190,7 +196,7 @@ describe("#thread", () => {
       headers: { Cookie: cookie },
       method: "GET",
       responseType: "arraybuffer",
-      url: `http://rutracker.org/forum/viewtopic.php?t=${id}`
+      url: `https://rutracker.org/forum/viewtopic.php?t=${id}`,
     });
   });
 
@@ -224,7 +230,7 @@ describe("#torrentFile", () => {
       headers: { Cookie: cookie },
       method: "GET",
       responseType: "stream",
-      url: `http://rutracker.org/forum/dl.php?t=${id}`
+      url: `https://rutracker.org/forum/dl.php?t=${id}`,
     });
   });
 

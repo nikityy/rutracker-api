@@ -2,7 +2,7 @@
 Позволяет искать по раздачам трекера Rutracker.org. Поскольку поиск запрещён для незарегистрированных пользователей, также поддерживаетcя и авторизация.
 
 ## Установка
-Запусти ```npm install rutracker-api``` (предполагается, что Node.js и пакетный менеждер npm у вас уже установлены). Для работы требуется версия Node.js >= 6.
+Запусти ```npm install rutracker-api-with-proxy``` (предполагается, что Node.js и пакетный менеждер npm у вас уже установлены). Для работы требуется версия Node.js >= 6.
 
 ## API
 
@@ -10,7 +10,7 @@
 Возвращает Promise<>. Promise упадет, если были введены неправильные `username` или `password`.
 
 ```js
-const RutrackerApi = require('rutracker-api');
+const RutrackerApi = require('rutracker-api-with-proxy');
 const rutracker = new RutrackerApi();
 
 rutracker.login({ username: '', password: '' })
@@ -24,7 +24,7 @@ rutracker.login({ username: '', password: '' })
 Возвращает Promise<[Torrent](#torrent)[]>. Параметр `sort` может принимать одно из следующих значений: [`"registered"`](#registered), [`"title"`](#title), [`"downloads"`](#downloads), [`"size"`](#size), `"lastMessage"`, [`"seeds"`](#seeds) или [`"leeches"`](#leeches). Параметр `order` может принимать значение `desc` или `asc`. Когда указан параметр `order`, `sort` также должен быть указан.
 
 ```js
-const RutrackerApi = require('rutracker-api');
+const RutrackerApi = require('rutracker-api-with-proxy');
 const rutracker = new RutrackerApi();
 
 rutracker.login({ username: '', password: '' })
@@ -37,7 +37,7 @@ rutracker.login({ username: '', password: '' })
 
 ```js
 const fs = require('fs');
-const RutrackerApi = require('rutracker-api');
+const RutrackerApi = require('rutracker-api-with-proxy');
 const rutracker = new RutrackerApi();
 
 rutracker.login({ username: '', password: '' })
@@ -49,7 +49,7 @@ rutracker.login({ username: '', password: '' })
 Возвращает Promise<string>.
 
 ```js
-const RutrackerApi = require('rutracker-api');
+const RutrackerApi = require('rutracker-api-with-proxy');
 const rutracker = new RutrackerApi();
 
 rutracker.login({ username: '', password: '' })
