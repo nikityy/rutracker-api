@@ -39,6 +39,7 @@ describe("#login", () => {
       Promise.resolve({
         headers: {
           "set-cookie": [
+            "bb_ssl=1; expires=Thu, 20-Jan-2033 09:00:35 GMT; Max-Age=315360000; path=/forum/; domain=.rutracker.org",
             "bb_session=XXX; expires=Tue, 15-Feb-2028 10:09:15 GMT; Max-Age=315360000; path=/forum/; domain=.rutracker.org; HttpOnly",
           ],
         },
@@ -51,7 +52,7 @@ describe("#login", () => {
 
     return pageProvider.login(username, password).then(() => {
       expect(pageProvider.authorized).toBeTruthy();
-      expect(pageProvider.cookie).toEqual("bb_session=XXX");
+      expect(pageProvider.cookie).toEqual("bb_ssl=1;bb_session=XXX");
     });
   });
 
