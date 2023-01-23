@@ -57,6 +57,40 @@ rutracker.login({ username: '', password: '' })
   .then(uri => console.log(uri));
 ```
 
+### Работа через HTTP(S)-proxy
+
+```js
+const RutrackerApi = require('rutracker-api-with-proxy');
+const rutracker = new RutrackerApi("https://rutracker.org", {
+  proxy: {
+    protocol: "http",
+    // protocol: "https",
+    host: "127.0.0.1",
+    port: "1080",
+    // auth: {
+    //   username: "user",
+    //   password: "password"
+    // }
+  }
+});
+```
+
+### Работа через SOCKS-proxy
+
+```js
+const {SocksProxyAgent} = require('socks-proxy-agent');
+const RutrackerApi = require('rutracker-api-with-proxy');
+const rutracker = new RutrackerApi("https://rutracker.org", {
+  httpsAgent: new SocksProxyAgent({
+    protocol: "socks5",
+    hostname: "127.0.0.1",
+    port: "1080",
+    // username: "user",
+    // password: "password"
+  })
+});
+```
+
 
 ## Типы
 

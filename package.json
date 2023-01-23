@@ -1,6 +1,6 @@
 {
   "name": "rutracker-api-with-proxy",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Provides login and search API for Rutracker.org.",
   "main": "index.js",
   "scripts": {
@@ -23,8 +23,7 @@
   "dependencies": {
     "axios": "^1.2.3",
     "cheerio": "^1.0.0-rc.12",
-    "windows-1251": "^1.1.0",
-    "socks-proxy-agent": "^7.0.0"
+    "windows-1251": "^1.1.0"
   },
   "devDependencies": {
     "eslint": "^8.32.0",

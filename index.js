@@ -2,9 +2,9 @@ const Parser = require("./lib/parser");
 const PageProvider = require("./lib/page-provider");
 
 class RutrackerApi {
-  constructor(host = "https://rutracker.org", proxy = undefined) {
+  constructor(host = "https://rutracker.org", httpClientConfigs = {}) {
     this.parser = new Parser(host);
-    this.pageProvider = new PageProvider(host, proxy);
+    this.pageProvider = new PageProvider(host, httpClientConfigs);
   }
 
   login({ username, password }) {
